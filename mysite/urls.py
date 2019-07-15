@@ -16,25 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.http import JsonResponse
-from lastest.models import User
-
-def a(request):
-    a = User()
-    a.name = request.GET['name']
-    a.idid = request.GET['id']
-    a.passpass = request.GET['pass']
-
-    a.save()
-    print(User.objects.all())
-    return JsonResponse({"TEST": True})
-
-def b(request):
-    tmp = User.objects.filter(idid=request.GET['id']).filter(passpass=request.GET['pass'])[0]
-    return JsonResponse({"TEST": tmp.name})
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('a/', a),
-    path('b/', b),
 ]
