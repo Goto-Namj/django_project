@@ -9,3 +9,6 @@ def index(request):
     order.inputs(1)
     order.inputs(1)
     return HttpResponse(order.output())
+
+def dps_test(request):
+    return render(request, 'dungreed/dps.html', {})
