@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import IO
 
 # Create your views here.
 def index(request):
-    return HttpResponse("뷰뷰뷰뷰뷰뷰")
+    order = IO()
+    order.inputs(1)
+    order.inputs(1)
+    order.inputs(1)
+    return HttpResponse(order.output())
