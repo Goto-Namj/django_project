@@ -11,4 +11,9 @@ def index(request):
     return HttpResponse(order.output())
 
 def dps_test(request):
-    return render(request, 'dungreed/dps.html', {})
+    order = IO()
+    order.inputs(1)
+    order.inputs(1)
+    order.inputs(1)
+    order_result = order.output()
+    return render(request, 'dungreed/dps.html', {'order':order_result})
