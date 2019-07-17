@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('dps', views.dps_test, name='dps'),
+    path('dps/<int:reqreq>/', views.dps_test, name='dps_test'),
 ]
