@@ -1,28 +1,20 @@
-{% load static %}
-<html>
-    <head>
-        <title>Dungreed</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    </head>
-    <body>
-        <div>
-            <h1><a href="">dps_test</a></h1>
-            <p>{{order}}</p>
-        </div>
+{% extends 'dungreed/base.html' %}
 
-        <div>
-            <p>asdf</p>
-            <h2><a href="">item_list</a></h2>
-            <p>zxcv</p>
-        </div>
+{% block content %}
+    <div>
+        <h1><a href="">dps_test</a></h1>
+        <p>{{order}}</p>
+    </div>
 
-        <div>
-            <p>ASDF</p>
-            <h2><a href="">ppap</a></h2>
-            <p>ZXCV</p>
-        </div>
-    </body>
-</html>
+    <div>
+        <p>asdf</p>
+        <h2><a href="">item_list</a></h2>
+        <p>zxcv</p>
+    </div>
+
+    <div>
+        <p>ASDF</p>
+        <h2><a href="">ppap</a></h2>
+        <p>ZXCV</p>
+    </div>
+{% endblock %}
