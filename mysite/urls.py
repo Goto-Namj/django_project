@@ -21,5 +21,4 @@ from django.http import JsonResponse
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dungreed.urls')),
-    path('dps', include('dungreed.urls')), # 얘가 없어도 동작한다 이에 따른 문제가 안생길지 모르겠다.
 ]
