@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class IO():
+class IO():     # 얘가 원래 MVC Control이니까 지워야함
     def __init__(self):
         self.Calc = Calc()
 
@@ -12,7 +12,7 @@ class IO():
         return self.Calc.give_answer()
 
 
-class Calc():
+class Calc():       # 얘는 MVC의 Model
     def __init__(self):
         self.elements = 0
 

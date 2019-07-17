@@ -18,3 +18,4 @@ def dps_test(request,reqreq):
 
 # https://tutorial.djangogirls.org/ko/extend_your_application/
 # 에서 404 뭐시기 db에서 데이터 못찾으면 할거 그거 있음
+# view에서는 처리를 해야함 (MVC의 Control)
