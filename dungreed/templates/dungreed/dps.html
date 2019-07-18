@@ -17,4 +17,41 @@
         <h2><a href="{% url 'index'%}">ppap</a></h2><!-- index는 view -->
         <p>ZXCV</p>
     </div>
+
+    <form action="" method="get">
+        <div><label for="n1">무기 최소 공격력 : </label>
+        <input id="n1" type="text" name="최소공격력"></div>
+        <div><label for="n2">무기 최대 공격력 : </label>
+        <input id="n2" type="text" name="최대공격력"></div>
+        <div><label for="n3">위력 : </label>
+        <input id="n3" type="text" name="위력"></div>
+        <div><label for="n4">크리티컬 확률 : </label>
+        <input id="n4" type="text" name="크리티컬확률"></div>
+        <div><label for="n5">크리티컬 데미지 : </label>
+        <input id="n5" type="text" name="크리티컬데미지"></div>
+        <div><label for="n6">고정 데미지 : </label>
+        <input id="n6" type="text" name="고정데미지"></div>
+        <div><label for="n7">공격 속도 : </label>
+        <input id="n7" type="text" name="공격속도"></div>
+        <input type="submit" value="검색">
+    </form>
+
+    <div><p>{{qwer}}</p></div>
+
+    <div><p>{{qqq}}</p></div>
+
+
+    <form action="/team_name_url/" method="post">
+        <label for="team_name">공격력 : </label>
+        <input id="team_name" type="text" name="name_field" value="null">
+        <input type="submit" value="완료">
+    </form>
 {% endblock %}
+<!--
+    dps =
+    (무기공격력 *
+        (1+위력/100) *(1+크리티컬 확률*크리티컬 데미지/10000)
+    +고정데미지)
+
+    * 공격속도
+-->
