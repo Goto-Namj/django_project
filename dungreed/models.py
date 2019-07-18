@@ -1,23 +1,13 @@
 from django.db import models
 
 
-class IO():     # 얘가 원래 MVC Control이니까 지워야함
-    def __init__(self):
-        self.Calc = Calc()
-
-    def inputs(self, element):
-        self.Calc.add(element)
-
-    def output(self):
-        return self.Calc.give_answer()
-
-
-class Calc():       # 얘는 MVC의 Model
-    def __init__(self):
-        self.elements = 0
-
-    def add(self, element):
-        self.elements += element
-    
-    def give_answer(self):
-        return self.elements
+class Calc():
+    def basic(self, a):
+        return ( (a[0]+a[1])/2 * (1+a[2]/100) * (1+a[3]*a[4]/10000) + a[5] )* a[6]
+        
+# dps = 
+# (무기공격력 *
+# (1 + 위력/100) * 
+# (1 + 크리티컬 확률*크리티컬 데미지/10000)
+# +고정데미지)
+# * 공격속도
