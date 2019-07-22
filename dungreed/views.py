@@ -4,6 +4,8 @@ from .models import Calc
 
 
 def dps_test(request):
+    if not request.GET:
+        return render(request, 'dungreed/dps.html')
     try:
         datas=list(map(float,request.GET.dict().values()))
     except:
