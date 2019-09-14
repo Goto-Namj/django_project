@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from .models import Calc
 
 
+def main_page(request):
+    return render(request, 'dungreed/main.html',{})
+
+
 def dps_test(request):
     if not request.GET:
         return render(request, 'dungreed/dps.html')
