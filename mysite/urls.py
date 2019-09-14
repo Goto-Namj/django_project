@@ -21,4 +21,5 @@ from django.http import JsonResponse
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dungreed.urls')),
+    # path('test/', include('test.urls')),
 ]
