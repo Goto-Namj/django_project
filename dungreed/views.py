@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Calc
+from .models import Calc, Test
 
 
 def main_page(request):
-    return render(request, 'dungreed/main.html',{})
+    t = str(Test.objects.all())+"남진명"    # 에러 있다고 뜨는데 정상 작동한다 왜? why?
+    return render(request, 'dungreed/main.html',{'t':t})
 
 
 def dps_test(request):

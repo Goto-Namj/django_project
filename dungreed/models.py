@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 class Calc():
@@ -9,9 +10,17 @@ class Calc():
         return round(result,3)
 
 
+class Test(models.Model):
+    name = models.CharField(max_length=10)
+    title = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title
+
+'''
 class Item(models.Model):
     name = models.CharField(max_length=30) # 9.16일 기준, 최대 길이가 한글9개 공백 3개 21byte
-    image = models.ImageField() # 이미지 파일 로컬 주소..?
+    image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100) # 이미지 파일 로컬 주소..?
     grade = models.CharField(max_length=10) # 일반. 고급. 희귀. 전설.
     use = models.CharField(max_length=20) # 한손 (보조무기) 15byte
     nature = models.CharField(max_length=15) # 원거리무기 10byte (인게임에 없지만 검색을 돕기 위해)
@@ -36,10 +45,11 @@ class SpecialState(models.Model):
 class Skill(models.Model):
     name = models.CharField(max_length=30)
     name_skill = models.CharField(max_length=30)
-    image_skill = models.ImageField()
+    image_skill = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
     data_skill = models.TextField()
     cooldown = models.IntegerField() # 후에 쿨탐 소수점 나오면 고칠 아이
 
 
 class Set(models.Model):
     pass
+'''
