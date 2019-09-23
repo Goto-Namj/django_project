@@ -13,10 +13,9 @@
     <div>
         <h2><a href="https://store.steampowered.com/app/753420/Dungreed/">스팀 상점 페이지</a></h2>
     </div>
-    <div>
-        {{ t }}
-    </div>
     {% for i in t %}
-    {{ i }}
+    <div>
+        {{ i.name }}
+    </div>
     {% endfor %}
 {% endblock %}

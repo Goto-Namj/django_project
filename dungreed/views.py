@@ -4,7 +4,7 @@ from .models import Calc, Test
 
 
 def main_page(request):
-    t = str(Test.objects.all())+"남진명"    # 에러 있다고 뜨는데 정상 작동한다 왜? why?
+    t = Test.objects.all())
     return render(request, 'dungreed/main.html',{'t':t})
 
 
