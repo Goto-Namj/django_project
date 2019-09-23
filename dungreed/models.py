@@ -14,8 +14,8 @@ class Test(models.Model):
     name = models.CharField(max_length=10)
     title = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.title
+    def __str__(self):  
+        return self.name
 
 '''
 class Item(models.Model):
