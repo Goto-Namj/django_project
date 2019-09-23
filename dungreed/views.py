@@ -4,7 +4,7 @@ from .models import Calc, Test
 
 
 def main_page(request):
-    t = Test.objects.all())
+    t = Test.objects.all()
     return render(request, 'dungreed/main.html',{'t':t})
 
 
