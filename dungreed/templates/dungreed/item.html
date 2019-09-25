@@ -1,0 +1,16 @@
+{% extends 'dungreed/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div>
+        <h1>아이템 사전</h1>
+    </div>
+
+    {% for i in item %}
+    <div>
+        <p>{{ i.name}}</p>
+        <p><img src=\static\image\item\{{i.name}}.png></p>
+        <p>{{ i.data }}</p>
+        <!-- post.text|linebreaksbr -->
+    </div>
+    {% endfor %}
+{% endblock %}

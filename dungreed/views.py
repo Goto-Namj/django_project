@@ -1,11 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Calc, Test
+from .models import Calc, Item
 
 
 def main_page(request):
-    t = Test.objects.all()
-    return render(request, 'dungreed/main.html',{'t':t})
+    return render(request, 'dungreed/main.html',{})
 
 
 def dps_test(request):
@@ -18,6 +17,11 @@ def dps_test(request):
     q = Calc().basic(datas)
     print(datas)
     return render(request, 'dungreed/dps.html', {'q':q})
+
+
+def item_dictionary(request):
+    item = Item.objects.all()
+    return render(request, 'dungreed/item.html',{'item':item})
 
 # https://tutorial.djangogirls.org/ko/extend_your_application/
 # 에서 404 뭐시기 db에서 데이터 못찾으면 할거 그거 있음
