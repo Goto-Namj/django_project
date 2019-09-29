@@ -34,6 +34,13 @@ class Item(models.Model):
         return self.name
 
 
+def get_default_data():
+    return { 'name':'Model' }
+
+class Mod(models.Model):
+    data = JSONField(default=get_default_data)
+
+
 '''
 class Skill(models.Model):
     name = models.CharField(max_length=30)
