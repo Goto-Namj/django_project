@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.postgres.fields import JSONField
 
 
 class Calc():
@@ -29,16 +30,10 @@ class Item(models.Model):
     group = models.CharField(max_length=25,blank=True) # (set)마나폴리 인형들 15byte (앞으로 뭐가 나올까?)
     state = models.CharField(max_length=25,) # json사용 공격력,공속,방어력,탄창,장전속도
     state_spc = models.CharField(max_length=25) # json사용 오른쪽에 설명되어있음
+    jeison = models.TextField()
 
     def __str__(self):
         return self.name
-
-
-def get_default_data():
-    return { 'name':'Model' }
-
-class Mod(models.Model):
-    data = JSONField(default=get_default_data)
 
 
 '''
