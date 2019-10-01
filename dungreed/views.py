@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Calc, Item
+import json
 
 
 def main_page(request):
@@ -21,6 +22,8 @@ def dps_test(request):
 
 def item_dictionary(request):
     item = Item.objects.all()
+    ii = json.loads(Item.objects.filter(name="오르문간드")[0].jeison)
+    print('\n\n',type(ii),ii,'\n\n',sep='') # str, {"대쉬액션 <탄환 추가>": "+2", "고정 대미지": "+3"}
     return render(request, 'dungreed/item.html',{'item':item})
 
 # https://tutorial.djangogirls.org/ko/extend_your_application/

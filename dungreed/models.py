@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.postgres.fields import JSONField
 
 
 class Calc():
@@ -21,6 +20,8 @@ class Item(models.Model):
     # 설명 = "뭐시기"
 
     name = models.CharField(max_length=30) # 9.16일 기준, 최대 길이가 한글9개 공백 3개 21byte
+    # 이미지 필드가 기존에 이미지가 있을때 db수정을 하면, 기존이미지4368과 같은 파일을 만들고 지정함.
+    # 수정이 필요하다.
     image = models.ImageField(upload_to='.\dungreed\static\image\item', max_length=100) # 이미지 파일 로컬 주소..?
     grade = models.CharField(max_length=10) # 일반. 고급. 희귀. 전설.
     use = models.CharField(max_length=20) # 한손 (보조무기) 15byte
@@ -36,6 +37,7 @@ class Item(models.Model):
         return self.name
 
 
+# Item.objects.filter(name="오르문간드")[0].jeison 으로 해당하는 내용 가져왔음
 '''
 class Skill(models.Model):
     name = models.CharField(max_length=30)
