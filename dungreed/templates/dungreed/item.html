@@ -1,16 +1,64 @@
 {% extends 'dungreed/base.html' %}
 {% load staticfiles %}
 {% block content %}
+    <style>
+        .dv {
+            width:97%;
+            height:99%;
+            box-sizing: content-box;
+            border: 5px solid red;
+            background-color: aqua;
+            display: inline-block;
+        }
+        ._55 {
+            cursor: pointer;
+            width:200px;
+            height:250px;
+            margin:20px;
+            padding:20px;
+            border:5px solid black;
+            display:inline-block;
+        }
+        p {
+            margin: 0px;
+        }
+        /* .ch1 {
+            width: 75%;
+            border:1px solid;
+            padding:10px;
+            display: inline-block;
+        }
+        .ch2 {
+            width: 24%;
+            height: 19vh;
+            font-size: 19px;
+            background-color: aqua;
+            display: inline-block;
+        }
+        .ch21 {
+            width: 23%;
+            height: 19vh;
+            bottom: 50px;
+            font-size: 19px;
+            border:1px solid;
+            padding:10px;
+            position: relative;
+            background-color: aqua;
+            display: inline-block;
+        } */
+    </style>
+
     <div>
         <h1>아이템 사전</h1>
     </div>
 
-    {% for i in item %}
-    <div>
-        <p>{{ i.name}}</p>
-        <p><img src=\static\image\item\{{i.name}}.png></p>
-        <p>{{ i.data }}</p>
-        <!-- post.text|linebreaksbr -->
+    <div align="center" class=dv>
+        {% for i in item %}
+        <div style="vertical-align: top;" class=_55>
+            <p><img src=\static\image\item\{{i.name}}.png></p>
+            <p>{{ i.name }}</p>
+            <!-- post.text|linebreaksbr -->
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
 {% endblock %}

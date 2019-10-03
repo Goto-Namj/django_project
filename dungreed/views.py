@@ -16,7 +16,7 @@ def dps_test(request):
     except:
         return render(request, 'dungreed/dps.html', {'err':'에러'})
     q = Calc().basic(datas)
-    print(datas)
+    # print(datas)
     return render(request, 'dungreed/dps.html', {'q':q})
 
 
