@@ -1,7 +1,23 @@
 {% extends 'dungreed/base.html' %}
 {% load staticfiles %}
 {% block content %}
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            var bodyOffset = jQuery('body').offset();
+            jQuery(window).scroll(function() {
+                if (jQuery(document).scrollTop() > bodyOffset.top) {
+                    jQuery('.header').addClass('scroll');
+                } else {
+                    jQuery('.header').removeClass('scroll');
+                }
+            });
+        });
+    </script>
     <style>
+        body{
+            min-height:2300px;
+        }
         .dv {
             width:97%;
             height:99%;
@@ -22,38 +38,32 @@
         p {
             margin: 0px;
         }
-        /* .ch1 {
-            width: 75%;
-            border:1px solid;
-            padding:10px;
-            display: inline-block;
+        .header {
+            position: absolute;
+            top: 10px;
+            right: 50%;
+            margin-right: -720px;
+            text-align:center;
+            width: 120px;
         }
-        .ch2 {
-            width: 24%;
-            height: 19vh;
-            font-size: 19px;
-            background-color: aqua;
-            display: inline-block;
+        .scroll {
+            position: fixed;
+            top: 180px;
+            background-color: blueviolet;
         }
-        .ch21 {
-            width: 23%;
-            height: 19vh;
-            bottom: 50px;
-            font-size: 19px;
-            border:1px solid;
-            padding:10px;
-            position: relative;
-            background-color: aqua;
-            display: inline-block;
-        } */
     </style>
-
+    <div class=header> 이 안의 내용을 좌측 아이템목록을 누르면 바뀌게 js써서해보자
+        추가로 처음에는 position fixed아닌데, 나중엔 바뀌게... </div>
     <div>
         <h1>아이템 사전</h1>
     </div>
-
     <div align="center" class=dv>
         {% for i in item %}
+        <!-- 아래 있는 애가 안두인 버튼? 임 -->
+        <!-- <a href="/ko-kr/heroes/anduin/">
+            <img src="https://static.heroesofthestorm.com/gd/3a87a62680f43b26f7dd3d203b77e8cd/heroes/anduin/circleIcon.png"
+            style="visibility: visible;">
+        </a> -->
         <div style="vertical-align: top;" class=_55>
             <p><img src=\static\image\item\{{i.name}}.png></p>
             <p>{{ i.name }}</p>
@@ -62,3 +72,5 @@
         {% endfor %}
     </div>
 {% endblock %}
+
+
