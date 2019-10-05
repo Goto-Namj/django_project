@@ -3,52 +3,68 @@
 {% block content %}
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-        jQuery(document).ready(function() {
-            var bodyOffset = jQuery('body').offset();
-            jQuery(window).scroll(function() {
-                if (jQuery(document).scrollTop() > bodyOffset.top) {
-                    jQuery('.header').addClass('scroll');
+        $(document).ready(function() {
+            var $bodyOffset = $('body').offset();
+            $(window).scroll(function() {
+                if ($(document).scrollTop() > bodyOffset.top+198) {
+                    $('.header').addClass('scroll');
                 } else {
-                    jQuery('.header').removeClass('scroll');
+                    $('.header').removeClass('scroll');
                 }
+            });
+        });
+
+        $(document).ready(function(){
+            var chd$ = $('._55').children();
+            var clck = $(chd$).click()
+            $('._55').click(function(){
+                $("."+event.target.parentNode.className).hide();
             });
         });
     </script>
     <style>
-        body{
-            min-height:2300px;
-        }
-        .dv {
-            width:97%;
-            height:99%;
-            box-sizing: content-box;
-            border: 5px solid red;
-            background-color: aqua;
-            display: inline-block;
-        }
-        ._55 {
-            cursor: pointer;
-            width:200px;
-            height:250px;
-            margin:20px;
-            padding:20px;
-            border:5px solid black;
-            display:inline-block;
-        }
+        /* body{
+            min-height:2000px;
+        } */
         p {
             margin: 0px;
         }
+        .dvpadding{
+            border:5px solid #2b2639;
+            padding:0px 3px 0px 0px;
+        }
+        .dv {
+            width:55.5%;
+            height:99%;
+            box-sizing: content-box;
+            border: 5px solid #654a59;
+            display: inline-block;
+            background-color:#332b3e;
+        }
+        ._55 {
+            cursor: pointer;
+            margin:5.5px 0px;
+            padding:12.9px 0px 0px 0.7px;
+            width:131px;
+            height:136px;
+            display:inline-block;
+            color:white;
+            background-image:url("/static/image/html_img/div_background.png");
+            vertical-align: top;
+        }
         .header {
             position: absolute;
-            top: 10px;
+            top: 265.2px;
             right: 50%;
-            margin-right: -720px;
+            margin-right: -696.8px;
             text-align:center;
-            width: 120px;
+            width: 542.4px;
+            height: 676.8px;
+            background-color: red;
         }
         .scroll {
             position: fixed;
-            top: 180px;
+            top: 57.2px;
             background-color: blueviolet;
         }
     </style>
@@ -58,19 +74,21 @@
         <h1>아이템 사전</h1>
     </div>
     <div align="center" class=dv>
-        {% for i in item %}
-        <!-- 아래 있는 애가 안두인 버튼? 임 -->
-        <!-- <a href="/ko-kr/heroes/anduin/">
-            <img src="https://static.heroesofthestorm.com/gd/3a87a62680f43b26f7dd3d203b77e8cd/heroes/anduin/circleIcon.png"
-            style="visibility: visible;">
-        </a> -->
-        <div style="vertical-align: top;" class=_55>
-            <p><img src=\static\image\item\{{i.name}}.png></p>
-            <p>{{ i.name }}</p>
-            <!-- post.text|linebreaksbr -->
+        <div class=dvpadding>
+            {% for i in item %}
+            <!-- 아래 있는 애가 안두인 버튼? 임 -->
+            <!-- <a href="/ko-kr/heroes/anduin/">
+                <img src="https://static.heroesofthestorm.com/gd/3a87a62680f43b26f7dd3d203b77e8cd/heroes/anduin/circleIcon.png"
+                style="visibility: visible;">
+            </a> -->
+            <div class=_55>
+                <div class={{i.name}}>
+                    <img style="margin:0px 0px 15px 0px" src=\static\image\item\{{i.name}}.png width="100px" height="100px">
+                    <p style="font-size: 13.5px;font-weight:bold;">{{ i.name }}</p>
+                    <!-- post.text|linebreaksbr -->
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 {% endblock %}
-
-
