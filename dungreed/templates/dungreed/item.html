@@ -12,10 +12,10 @@
     <div class=item_list>
         <div class=item_list_pd>
             {% for i in item %}
-            <div align="center" class="item_element {{i.name}}_choose">
-                <div class={{i.name}}>
-                    <img class={{i.name}} style="margin:0px 0px 15px 0px" src=\static\image\item\{{i.image_name}}.png width="100px" height="100px">
-                    <p class={{i.name}} style="font-size: 13.5px;font-weight:bold;">{{ i.name }}</p>
+            <div align="center" class="item_element {{i.image_name}}_choose">
+                <div class={{i.image_name}}>
+                    <img class={{i.image_name}} style="margin:0px 0px 15px 0px" src=\static\image\item\{{i.image_name}}.png width="100px" height="100px">
+                    <p class={{i.image_name}} style="font-size: 13.5px;font-weight:bold;">{{ i.name }}</p>
                 </div>
             </div>
             {% endfor %}
@@ -24,7 +24,7 @@
     
     <div class=item_detail><div class=pd1><div class=pd2><div class=pd3>
     {% for i in item %}
-    <div class={{i.name}}_detail style="display:none;">
+    <div class={{i.image_name}}_detail style="display:none;">
         <div align="center" class=item_name>
             {% if i.grade == '전설' %}<div class=color_legend>
             {% elif i.grade == '희귀' %}<div class=color_rare>
