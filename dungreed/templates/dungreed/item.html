@@ -1,94 +1,70 @@
 {% extends 'dungreed/base.html' %}
 {% load staticfiles %}
+{% load dict_value %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/itemcss.css' %}">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script>
+    <script>   
         $(document).ready(function() {
             var $bodyOffset = $('body').offset();
             $(window).scroll(function() {
-                if ($(document).scrollTop() > bodyOffset.top+198) {
-                    $('.header').addClass('scroll');
+                if ($(document).scrollTop() > $bodyOffset.top+198) {
+                    $('.item_detail').addClass('scroll');
                 } else {
-                    $('.header').removeClass('scroll');
+                    $('.item_detail').removeClass('scroll');
                 }
             });
-        });
 
-        $(document).ready(function(){
-            var chd$ = $('._55').children();
-            var clck = $(chd$).click()
-            $('._55').click(function(){
-                $("."+event.target.parentNode.className).hide();
+            var chd$ = $('.item_element').children();
+            $(chd$).click(function(){
+                $(".pd3").children().css("display","none");
+                $("."+event.target.className+"_detail").css("display","block");
             });
+
         });
     </script>
-    <style>
-        /* body{
-            min-height:2000px;
-        } */
-        p {
-            margin: 0px;
-        }
-        .dvpadding{
-            border:5px solid #2b2639;
-            padding:0px 3px 0px 0px;
-        }
-        .dv {
-            width:55.5%;
-            height:99%;
-            box-sizing: content-box;
-            border: 5px solid #654a59;
-            display: inline-block;
-            background-color:#332b3e;
-        }
-        ._55 {
-            cursor: pointer;
-            margin:5.5px 0px;
-            padding:12.9px 0px 0px 0.7px;
-            width:131px;
-            height:136px;
-            display:inline-block;
-            color:white;
-            background-image:url("/static/image/html_img/div_background.png");
-            vertical-align: top;
-        }
-        .header {
-            position: absolute;
-            top: 265.2px;
-            right: 50%;
-            margin-right: -696.8px;
-            text-align:center;
-            width: 542.4px;
-            height: 676.8px;
-            background-color: red;
-        }
-        .scroll {
-            position: fixed;
-            top: 57.2px;
-            background-color: blueviolet;
-        }
-    </style>
-    <div class=header> 이 안의 내용을 좌측 아이템목록을 누르면 바뀌게 js써서해보자
-        추가로 처음에는 position fixed아닌데, 나중엔 바뀌게... </div>
+
     <div>
         <h1>아이템 사전</h1>
     </div>
-    <div align="center" class=dv>
-        <div class=dvpadding>
+
+    <div class=item_list>
+        <div class=item_list_pd>
             {% for i in item %}
-            <!-- 아래 있는 애가 안두인 버튼? 임 -->
-            <!-- <a href="/ko-kr/heroes/anduin/">
-                <img src="https://static.heroesofthestorm.com/gd/3a87a62680f43b26f7dd3d203b77e8cd/heroes/anduin/circleIcon.png"
-                style="visibility: visible;">
-            </a> -->
-            <div class=_55>
+            <div align="center" class=item_element>
                 <div class={{i.name}}>
-                    <img style="margin:0px 0px 15px 0px" src=\static\image\item\{{i.name}}.png width="100px" height="100px">
-                    <p style="font-size: 13.5px;font-weight:bold;">{{ i.name }}</p>
-                    <!-- post.text|linebreaksbr -->
+                    <img class={{i.name}} style="margin:0px 0px 15px 0px" src=\static\image\item\{{i.image_name}}.png width="100px" height="100px">
+                    <p class={{i.name}} style="font-size: 13.5px;font-weight:bold;">{{ i.name }}</p>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+    
+    <div class=item_detail><div class=pd1><div class=pd2><div class=pd3>
+    {% for i in item %}
+    <div class={{i.name}}_detail style="display:none;">
+        <div align="center" class=item_name>{{i.name}}</div>
+        <div align="center" class=item_image><img src=\static\image\item\{{i.image_name}}.png width="100px" height="100px"></div>
+        <div class=item_state>
+            {% for j in jps.0|dvu:i.name %}
+                <p>{{jps.1|dvu:i.name|dvu:j}} : {{jps.2|dvu:i.name|dvu:j}}</p>
+            {% endfor %}
+        </div>
+        <div class=item_states>
+            <div class=item_option>
+                {% for j in jpo.0|dvu:i.name %}
+                    <p>{{jpo.1|dvu:i.name|dvu:j}} : {{jpo.2|dvu:i.name|dvu:j}}</p>
+                {% endfor %}
+            </div>
+            <p>{{i.grade}}</p>
+            <p>{{i.use}}</p>
+            <p>{{i.nature}}</p>
+            <p>{{i.data}}</p>
+            <p>{{i.tag}}</p>
+            <p>{{i.group}}</p>
+        </div>
+    </div>
+    {% endfor %}
+    </div></div></div></div>
 {% endblock %}
