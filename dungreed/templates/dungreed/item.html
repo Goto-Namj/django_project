@@ -18,7 +18,9 @@
             var chd$ = $('.item_element').children();
             $(chd$).click(function(){
                 $(".pd3").children().css("display","none");
+                $(".item_list_pd").children().removeClass('item_element_choose');
                 $("."+event.target.className+"_detail").css("display","block");
+                $("."+event.target.className+"_choose").addClass('item_element_choose');
             });
 
         });
@@ -31,7 +33,7 @@
     <div class=item_list>
         <div class=item_list_pd>
             {% for i in item %}
-            <div align="center" class=item_element>
+            <div align="center" class="item_element {{i.name}}_choose">
                 <div class={{i.name}}>
                     <img class={{i.name}} style="margin:0px 0px 15px 0px" src=\static\image\item\{{i.image_name}}.png width="100px" height="100px">
                     <p class={{i.name}} style="font-size: 13.5px;font-weight:bold;">{{ i.name }}</p>

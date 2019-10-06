@@ -24,6 +24,9 @@ p {
     background-image: url("/static/image/html_img/item_element_bg.png");
     /* vertical-align: top; */ /*없어도 되는듯 inline해놓긴 했어도*/
 }
+.item_element_choose {
+    background-image: url("/static/image/html_img/item_element_choose_bg.png");
+}
 .pd1, .pd2, .pd3 {height:98.53%;}
 .pd1 {border: 5px solid #654a59;}
 .pd2 {border: 5px solid #222034;}
