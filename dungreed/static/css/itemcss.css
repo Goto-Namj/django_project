@@ -51,7 +51,7 @@ p {
     margin: 14.9px 14.9px 0px 14.9px;
     padding: 5px 0px 0px 0px;
     font-size: 38.1px;
-    color: #ff008e; /*수정 필요*/
+    /* color: #ff008e; */
     background-image: url("/static/image/html_img/item_name_bg.png");
 }
 .item_image {
@@ -83,4 +83,46 @@ p {
     font-size: 20px;
     display: inline-block;
     background-image: url("/static/image/html_img/item_states_bg.png");
+}
+
+
+
+.color_legend {
+    color: #ff008e;
+}
+.color_rare {
+    color: #ffd200;
+}
+.color_highclass {
+    color: #2b7bff;
+}
+.color_green {
+    color: #00ff00;
+}
+.color_red {
+    color: #ff0000;
+}
+.color_orange {
+    color: #ff8429;
+}
+.color_purple {
+    color: #a54bff;
+}
+.color_blue {
+    color: #477eff;
+}
+.color_yellow {
+    color: #ffff00;
+}
+.color_nature {
+    color: #b4b4b4;
+}
+.color_data {
+    color: #caffff;
+}
+.color_tag {
+    color: #9fda88;
+}
+.color_group {
+
 }

@@ -16,16 +16,13 @@ def dps_test(request):
     except:
         return render(request, 'dungreed/dps.html', {'err':'에러'})
     q = Calc().basic(datas)
-    # print(datas)
     return render(request, 'dungreed/dps.html', {'q':q})
 
 
 def item_dictionary(request):
-    item = Item.objects.all()
+    item = Item.objects.order_by('name')
     jps = JsonProcess().lkvs(item)
     jpo = JsonProcess().lkvo(item)
-    # ii = json.loads(Item.objects.filter(name="오르문간드")[0].option)
-    # print('\n\n',type(ii),ii,'\n\n',sep='') # str, {"대쉬액션 <탄환 추가>": "+2", "고정 대미지": "+3"}
     return render(request, 'dungreed/item.html',{'item':item,'jps':jps,'jpo':jpo})
 
 # https://tutorial.djangogirls.org/ko/extend_your_application/

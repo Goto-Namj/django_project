@@ -13,15 +13,9 @@ class Calc():
 
 class JsonProcess():
     def lkvs(self,i):
-        d = {}
-        d2 = {}
-        d3 = {}
+        d,d2,d3 = {},{},{}
         for a in i:
-            d[a.name]=[]
-            d2[a.name]=[]
-            d3[a.name]=[]
-            jl = json.loads(a.state)
-            c = 0
+            d[a.name],d2[a.name],d3[a.name],c,jl=[],[],[],0,json.loads(a.state)
             for b in jl.keys():
                 d[a.name].append(c)
                 d2[a.name].append(b)
@@ -30,16 +24,11 @@ class JsonProcess():
         return [d,d2,d3]
 
     def lkvo(self,i):
-        d = {}
-        d2 = {}
-        d3 = {}
+        d,d2,d3 = {},{},{}
         for a in i:
-            d[a.name]=[]
-            d2[a.name]=[]
-            d3[a.name]=[]
+            d[a.name],d2[a.name],d3[a.name]=[],[],[]
             if a.option:
-                jl = json.loads(a.option)
-                c = 0
+                c,jl=0,json.loads(a.option)
                 for b in jl.keys():
                     d[a.name].append(c)
                     d2[a.name].append(b)

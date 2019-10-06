@@ -46,25 +46,50 @@
     <div class=item_detail><div class=pd1><div class=pd2><div class=pd3>
     {% for i in item %}
     <div class={{i.name}}_detail style="display:none;">
-        <div align="center" class=item_name>{{i.name}}</div>
+        <div align="center" class=item_name>
+            {% if i.grade == '전설' %}<div class=color_legend>
+            {% elif i.grade == '희귀' %}<div class=color_rare>
+            {% elif i.grade == '고급' %}<div class=color_highclass>
+            {% else %}<div>
+            {% endif %}{{i.name}}</div>
+        </div>
         <div align="center" class=item_image><img src=\static\image\item\{{i.image_name}}.png width="100px" height="100px"></div>
         <div class=item_state>
             {% for j in jps.0|dvu:i.name %}
-                <p>{{jps.1|dvu:i.name|dvu:j}} : {{jps.2|dvu:i.name|dvu:j}}</p>
+                <p>{{jps.1|dvu:i.name|dvu:j}} : <span class=color_yellow>{{jps.2|dvu:i.name|dvu:j}}</span></p>
             {% endfor %}
         </div>
         <div class=item_states>
             <div class=item_option>
                 {% for j in jpo.0|dvu:i.name %}
-                    <p>{{jpo.1|dvu:i.name|dvu:j}} : {{jpo.2|dvu:i.name|dvu:j}}</p>
+                    {% if jpo.1|dvu:i.name|dvu:j == '초록' %}
+                        ▶ <span class=color_green>{{jpo.2|dvu:i.name|dvu:j}}</span>
+                    {% elif jpo.1|dvu:i.name|dvu:j == '빨강' %}
+                        ▶ <span class=color_red>{{jpo.2|dvu:i.name|dvu:j}}</span>
+                    {% elif jpo.1|dvu:i.name|dvu:j == '주황' %}
+                        ▶ <span class=color_orange>{{jpo.2|dvu:i.name|dvu:j}}</span>
+                    {% elif jpo.1|dvu:i.name|dvu:j == '보라' %}
+                        ▶ <span class=color_purple>{{jpo.2|dvu:i.name|dvu:j}}</span>
+                    {% elif jpo.1|dvu:i.name|dvu:j == '파랑' %}
+                        ▶ <span class=color_blue>{{jpo.2|dvu:i.name|dvu:j}}</span>
+                    {% elif jpo.1|dvu:i.name|dvu:j == '노랑' %}
+                        ▶ <span class=color_yellow>{{jpo.2|dvu:i.name|dvu:j}}</span>
+                    {% elif jpo.2|dvu:i.name|dvu:j|aom == '+' %}
+                        <p>▶ <span class=color_green>{{jpo.2|dvu:i.name|dvu:j}}</span> {{jpo.1|dvu:i.name|dvu:j}}</p>
+                    {% elif jpo.2|dvu:i.name|dvu:j|aom == '-' %}
+                        <p>▶ <span class=color_red>{{jpo.2|dvu:i.name|dvu:j}}</span> {{jpo.1|dvu:i.name|dvu:j}}</p>
+                    {% else %}
+                        <p>▶ {{jpo.2|dvu:i.name|dvu:j}} {{jpo.1|dvu:i.name|dvu:j}}</p>
+                    {% endif %}
                 {% endfor %}
             </div>
-            <p>{{i.grade}}</p>
-            <p>{{i.use}}</p>
-            <p>{{i.nature}}</p>
-            <p>{{i.data}}</p>
-            <p>{{i.tag}}</p>
-            <p>{{i.group}}</p>
+            <div class=color_nature>
+                <p>{{i.grade}} 아이템</p>
+                <p>{{i.use}} <{{i.nature}}></p>
+            </div>
+            <p class=color_data>{{i.data}}</p>
+            <p class=color_tag>{{i.tag}}</p>
+            <p class=color_group>{{i.group}}</p>
         </div>
     </div>
     {% endfor %}
