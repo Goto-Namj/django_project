@@ -22,7 +22,6 @@ p {
     display: inline-block;
     color: white;
     background-image: url("/static/image/html_img/item_element_bg.png");
-    /* vertical-align: top; */ /*없어도 되는듯 inline해놓긴 했어도*/
 }
 .item_element_choose {
     background-image: url("/static/image/html_img/item_element_choose_bg.png");
@@ -38,7 +37,6 @@ p {
     width: 542.4px;
     height: 676.8px;
     margin-right: -696.8px;
-    /* text-align: center; */
     background-color: #332b3e;
 }
 .scroll {
@@ -51,7 +49,6 @@ p {
     margin: 14.9px 14.9px 0px 14.9px;
     padding: 5px 0px 0px 0px;
     font-size: 38.1px;
-    /* color: #ff008e; */
     background-image: url("/static/image/html_img/item_name_bg.png");
 }
 .item_image {
@@ -64,18 +61,18 @@ p {
 }
 .item_state {
     position: relative;
-    top: -49px;
+    top: -8.5px;
     left: -3px; 
     width: 337px;
     height: 109.5px;
     padding: 15.5px 0px 0px 15.5px;
-    font-size: 20px;
+    font-size: 18px;
     display: inline-block;
     background-image: url("/static/image/html_img/item_state_bg.png");
 }
 .item_states {
     position: relative;
-    top: -49px;
+    top: -8.5px;
     width: 453.5px;
     height: 392.5px;
     margin: 0px 0px 0px 14.09px;
@@ -84,9 +81,6 @@ p {
     display: inline-block;
     background-image: url("/static/image/html_img/item_states_bg.png");
 }
-
-
-
 .color_legend {
     color: #ff008e;
 }

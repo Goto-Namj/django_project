@@ -58,7 +58,7 @@ class Item(models.Model):
     data = models.TextField()
     tag = models.CharField(max_length=20,blank=True) # #충전형,#카타나 7byte (앞으로 뭐가 나올지 몰라서.)
     group = models.CharField(max_length=25,blank=True) # (set)마나폴리 인형들 15byte (앞으로 뭐가 나올까?)
-    state = models.TextField(blank=True) # json사용 공격력,공속,방어력,탄창,장전속도
+    state = models.TextField(blank=True) # json사용 공격력,공속,방어력,탄창,X 장전속도
     option = models.TextField(blank=True) # json사용 오른쪽에 설명되어있음
 
     def __str__(self):

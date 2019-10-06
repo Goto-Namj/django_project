@@ -15,7 +15,7 @@
             <div align="center" class="item_element {{i.image_name}}_choose">
                 <div class={{i.image_name}}>
                     <img class={{i.image_name}} style="margin:0px 0px 15px 0px" src=\static\image\item\{{i.image_name}}.png width="100px" height="100px">
-                    <p class={{i.image_name}} style="font-size: 13.5px;font-weight:bold;">{{ i.name }}</p>
+                    <p class={{i.image_name}} style="font-size: 13px;font-weight:bold;">{{ i.name }}</p>
                 </div>
             </div>
             {% endfor %}
@@ -32,27 +32,34 @@
             {% else %}<div>
             {% endif %}{{i.name}}</div>
         </div>
-        <div align="center" class=item_image><img src=\static\image\item\{{i.image_name}}.png width="100px" height="100px"></div>
-        <div class=item_state>
-            {% for j in jps.0|dvu:i.name %}
-                <p>{{jps.1|dvu:i.name|dvu:j}} : <span class=color_yellow>{{jps.2|dvu:i.name|dvu:j}}</span></p>
-            {% endfor %}
+        <div class=tmp>
+            <div align="center" class=item_image><img src=\static\image\item\{{i.image_name}}.png width="100px" height="100px"></div>
+            <div class=item_state>
+                {% for j in jps.0|dvu:i.name %}
+                    {{jps.1|dvu:i.name|dvu:j}} : <div style="display:inline-block;" class=color_yellow>{{jps.2|dvu:i.name|dvu:j}}</div><br>
+                {% endfor %}
+                {% if jps.0|dvu:i.name|length < 1 %}<br><br><br><br>
+                {% elif jps.0|dvu:i.name|length < 2 %}<br><br><br>
+                {% elif jps.0|dvu:i.name|length < 3 %}<br><br>
+                {% elif jps.0|dvu:i.name|length < 4 %}<br>
+                {% endif %}
+            </div>
         </div>
         <div class=item_states>
             <div class=item_option>
                 {% for j in jpo.0|dvu:i.name %}
-                    {% if jpo.1|dvu:i.name|dvu:j == '초록' %}
-                        ▶ <span class=color_green>{{jpo.2|dvu:i.name|dvu:j}}</span>
-                    {% elif jpo.1|dvu:i.name|dvu:j == '빨강' %}
-                        ▶ <span class=color_red>{{jpo.2|dvu:i.name|dvu:j}}</span>
-                    {% elif jpo.1|dvu:i.name|dvu:j == '주황' %}
-                        ▶ <span class=color_orange>{{jpo.2|dvu:i.name|dvu:j}}</span>
-                    {% elif jpo.1|dvu:i.name|dvu:j == '보라' %}
-                        ▶ <span class=color_purple>{{jpo.2|dvu:i.name|dvu:j}}</span>
-                    {% elif jpo.1|dvu:i.name|dvu:j == '파랑' %}
-                        ▶ <span class=color_blue>{{jpo.2|dvu:i.name|dvu:j}}</span>
-                    {% elif jpo.1|dvu:i.name|dvu:j == '노랑' %}
-                        ▶ <span class=color_yellow>{{jpo.2|dvu:i.name|dvu:j}}</span>
+                    {% if jpo.2|dvu:i.name|dvu:j == '초록' %}
+                        <p>▶ <span class=color_green>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                    {% elif jpo.2|dvu:i.name|dvu:j == '빨강' %}
+                        <p>▶ <span class=color_red>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                    {% elif jpo.2|dvu:i.name|dvu:j == '주황' %}
+                        <p>▶ <span class=color_orange>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                    {% elif jpo.2|dvu:i.name|dvu:j == '보라' %}
+                        <p>▶ <span class=color_purple>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                    {% elif jpo.2|dvu:i.name|dvu:j == '파랑' %}
+                        <p>▶ <span class=color_blue>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                    {% elif jpo.2|dvu:i.name|dvu:j == '노랑' %}
+                        <p>▶ <span class=color_yellow>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
                     {% elif jpo.2|dvu:i.name|dvu:j|aom == '+' %}
                         <p>▶ <span class=color_green>{{jpo.2|dvu:i.name|dvu:j}}</span> {{jpo.1|dvu:i.name|dvu:j}}</p>
                     {% elif jpo.2|dvu:i.name|dvu:j|aom == '-' %}
@@ -66,7 +73,7 @@
                 <p>{{i.grade}} 아이템</p>
                 <p>{{i.use}} <{{i.nature}}></p>
             </div>
-            <p class=color_data>{{i.data}}</p>
+            <p class=color_data>"{{i.data}}"</p>
             <p class=color_tag>{{i.tag}}</p>
             <p class=color_group>{{i.group}}</p>
         </div>
