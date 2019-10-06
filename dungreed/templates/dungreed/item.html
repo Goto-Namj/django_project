@@ -2,30 +2,9 @@
 {% load staticfiles %}
 {% load dict_value %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/itemcss.css' %}">
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script>   
-        $(document).ready(function() {
-            var $bodyOffset = $('body').offset();
-            $(window).scroll(function() {
-                if ($(document).scrollTop() > $bodyOffset.top+198) {
-                    $('.item_detail').addClass('scroll');
-                } else {
-                    $('.item_detail').removeClass('scroll');
-                }
-            });
-
-            var chd$ = $('.item_element').children();
-            $(chd$).click(function(){
-                $(".pd3").children().css("display","none");
-                $(".item_list_pd").children().removeClass('item_element_choose');
-                $("."+event.target.className+"_detail").css("display","block");
-                $("."+event.target.className+"_choose").addClass('item_element_choose');
-            });
-
-        });
-    </script>
-
+<link rel="stylesheet" href="{% static 'css/item_css.css' %}">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="{% static 'js/item_js.js' %}"></script>
     <div>
         <h1>아이템 사전</h1>
     </div>
