@@ -48,25 +48,27 @@
         <div class=item_states>
             <div class=item_option>
                 {% for j in jpo.0|dvu:i.name %}
-                    {% if jpo.2|dvu:i.name|dvu:j == '초록' %}
-                        <p>▶ <span class=color_green>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
-                    {% elif jpo.2|dvu:i.name|dvu:j == '빨강' %}
-                        <p>▶ <span class=color_red>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
-                    {% elif jpo.2|dvu:i.name|dvu:j == '주황' %}
-                        <p>▶ <span class=color_orange>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
-                    {% elif jpo.2|dvu:i.name|dvu:j == '보라' %}
-                        <p>▶ <span class=color_purple>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
-                    {% elif jpo.2|dvu:i.name|dvu:j == '파랑' %}
-                        <p>▶ <span class=color_blue>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
-                    {% elif jpo.2|dvu:i.name|dvu:j == '노랑' %}
-                        <p>▶ <span class=color_yellow>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
-                    {% elif jpo.2|dvu:i.name|dvu:j|aom == '+' %}
-                        <p>▶ <span class=color_green>{{jpo.2|dvu:i.name|dvu:j}}</span> {{jpo.1|dvu:i.name|dvu:j}}</p>
-                    {% elif jpo.2|dvu:i.name|dvu:j|aom == '-' %}
-                        <p>▶ <span class=color_red>{{jpo.2|dvu:i.name|dvu:j}}</span> {{jpo.1|dvu:i.name|dvu:j}}</p>
-                    {% else %}
-                        <p>▶ {{jpo.2|dvu:i.name|dvu:j}} {{jpo.1|dvu:i.name|dvu:j}}</p>
-                    {% endif %}
+                    {% for x in jpo.2|dvu:i.name|dvu:j|rd %}
+                        {% if jpo.2|dvu:i.name|dvu:j|cf == '초록' %}
+                            <p>▶ <span class=color_green>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                        {% elif jpo.2|dvu:i.name|dvu:j|cf == '빨강' %}
+                            <p>▶ <span class=color_red>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                        {% elif jpo.2|dvu:i.name|dvu:j|cf == '주황' %}
+                            <p>▶ <span class=color_orange>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                        {% elif jpo.2|dvu:i.name|dvu:j|cf == '보라' %}
+                            <p>▶ <span class=color_purple>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                        {% elif jpo.2|dvu:i.name|dvu:j|cf == '파랑' %}
+                            <p>▶ <span class=color_blue>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                        {% elif jpo.2|dvu:i.name|dvu:j|cf == '노랑' %}
+                            <p>▶ <span class=color_yellow>{{jpo.1|dvu:i.name|dvu:j}}</span></p>
+                        {% elif jpo.2|dvu:i.name|dvu:j|aom == '+' %}
+                            <p>▶ <span class=color_green>{{jpo.2|dvu:i.name|dvu:j}}</span> {{jpo.1|dvu:i.name|dvu:j}}</p>
+                        {% elif jpo.2|dvu:i.name|dvu:j|aom == '-' %}
+                            <p>▶ <span class=color_red>{{jpo.2|dvu:i.name|dvu:j}}</span> {{jpo.1|dvu:i.name|dvu:j}}</p>
+                        {% else %}
+                            <p>▶ {{jpo.2|dvu:i.name|dvu:j}} {{jpo.1|dvu:i.name|dvu:j}}</p>
+                        {% endif %}
+                    {% endfor %}
                 {% endfor %}
             </div>
             <div class=color_nature>

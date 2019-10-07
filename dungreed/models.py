@@ -15,12 +15,14 @@ class JsonProcess():
     def lkvs(self,i):
         d,d2,d3 = {},{},{}
         for a in i:
-            d[a.name],d2[a.name],d3[a.name],c,jl=[],[],[],0,json.loads(a.state)
-            for b in jl.keys():
-                d[a.name].append(c)
-                d2[a.name].append(b)
-                d3[a.name].append(jl[b])
-                c+=1
+            d[a.name],d2[a.name],d3[a.name]=[],[],[]
+            if a.state:
+                c,jl=0,json.loads(a.state)
+                for b in jl.keys():
+                    d[a.name].append(c)
+                    d2[a.name].append(b)
+                    d3[a.name].append(jl[b])
+                    c+=1
         return [d,d2,d3]
 
     def lkvo(self,i):
@@ -42,7 +44,7 @@ class Item(models.Model):
     # name image grade use nature data tag group state option
     # 이미지 등급 사용방식 아이템성격 설명 태그 포함된세트효과 능력치 특수능력치
     # 사용방식 = 양손무기 한손 (주무기) 한손 (보조무기) 액세서리
-    # 아이템성격 = 원거리무기 근접무기 액세서리
+    # 아이템성격 = 원거리무기 근접무기 보조무기 액세서리
     # #카타나 #창 #날개 #충전형 #권총 NULL
     # 일반 아이템(하양)  고급 아이템(파랑)  희귀 아이템(노랑)  전설 아이템(분홍)
     # 설명 = "뭐시기"
