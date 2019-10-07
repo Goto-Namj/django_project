@@ -4,6 +4,13 @@ body{
 p {
     margin: 0px;
 }
+
+.item_filter {
+    width: 100%;
+    height: 50px;
+    background-color: red;
+}
+
 .item_list_pd {border: 5px solid #2b2639;}
 .item_list {
     width: 55.5%;
@@ -40,8 +47,8 @@ p {
     background-color: #332b3e;
 }
 .scroll {
-    top: 57.2px;
     position: fixed;
+    top: 57.2px;
     background-color: #332b3e;
 }
 .item_name {
@@ -81,42 +88,16 @@ p {
     display: inline-block;
     background-image: url("/static/image/html_img/item_states_bg.png");
 }
-.color_legend {
-    color: #ff008e;
-}
-.color_rare {
-    color: #ffd200;
-}
-.color_highclass {
-    color: #2b7bff;
-}
-.color_green {
-    color: #00ff00;
-}
-.color_red {
-    color: #ff0000;
-}
-.color_orange {
-    color: #ff8429;
-}
-.color_purple {
-    color: #a54bff;
-}
-.color_blue {
-    color: #477eff;
-}
-.color_yellow {
-    color: #ffff00;
-}
-.color_nature {
-    color: #b4b4b4;
-}
-.color_data {
-    color: #caffff;
-}
-.color_tag {
-    color: #9fda88;
-}
-.color_group {
-
-}
+.color_legend {color: #ff008e;}
+.color_rare {color: #ffd200;}
+.color_highclass {color: #2b7bff;}
+.color_green {color: #00ff00;}
+.color_red {color: #ff0000;}
+.color_orange {color: #ff8429;}
+.color_purple {color: #a54bff;}
+.color_blue {color: #477eff;}
+.color_yellow {color: #ffff00;}
+.color_nature {color: #b4b4b4;}
+.color_data {color: #caffff;}
+.color_tag {color: #9fda88;}
+.color_group {}
