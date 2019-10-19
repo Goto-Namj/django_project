@@ -3,15 +3,26 @@
 {% load dict_value %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/item_css.css' %}">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> <!-- slider -->
+<link rel="stylesheet" href="/resources/demos/style.css"> <!-- slider -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- slider -->
 <script src="{% static 'js/item_js.js' %}"></script>
     <div>
         <h1>아이템 사전</h1>
     </div>
 
-    <div class=item_filter>
+    <!-- <div class=item_filter>
         
-    </div>
+    </div> -->
+    <div id="slider" style="width: 100px;"></div>
+    <input id="ipt1"></input>
+    <input id="ipt2"></input>
+    <br>
+    
+
+
+
 
     <div class=item_list>
         <div class=item_list_pd>

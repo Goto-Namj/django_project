@@ -5,11 +5,12 @@ p {
     margin: 0px;
 }
 
-.item_filter {
+/* .item_filter {
     width: 100%;
     height: 50px;
     background-color: red;
-}
+} */
+
 
 .item_list_pd {border: 5px solid #2b2639;}
 .item_list {
