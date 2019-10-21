@@ -12,17 +12,44 @@
         <h1>아이템 사전</h1>
     </div>
 
-    <!-- <div class=item_filter>
+    <div class=item_filter>
         
-    </div> -->
-    <input id="ipt1" style="width: 50px;"></input>
-    <div id="slider" style="margin: 0px 20px; display: inline-block; width: 200px;"></div>
-    <input id="ipt2" style="width: 50px;"></input>
-    <br>
+        <div style="width: 55.5%; border: 5px solid #a97874;">
+            <input id="iptt" style="width: 50px;" placeholder="검색"></input>
+
+            <select class="state">
+                <option disabled selected>능력치</option>
+                <option value="최소 공격력v">최소 공격력</option>
+                <option value="최대 공격력v">최대 공격력</option>
+                <option value="초당 공격 횟수v">초당 공격 횟수</option>
+                <option value="방어력v">방어력</option>
+                <option value="탄창v">탄창</option>
+            </select>
+
+            <input id="ipt1" style="width: 50px;"></input>
+            <div id="slider" style="margin: 0px 20px; display: inline-block; width: 200px;"></div>
+            <input id="ipt2" style="width: 50px;"></input>
+
+            <button type="button" id="myBtn" onclick="myFunction()" style="font-weight: bold;">✓✔</button>
+
+            <div class="order_by" style="float:right;">
+                <a>정렬 기준 : </a>
+                <select class="state">
+                    <option value="이름v">이름</option>
+                    <option value="평균 공격력v">평균 공격력</option>
+                    <option value="공격력 편차v">공격력 편차</option>
+                    <option value="초당 공격 횟수v">초당 공격 횟수</option>
+                </select>
+
+                <button type="button" class="myBtn" onclick="myFunction()" style="font-weight: bold;">△</button>
+            </div>
+        </div>
+
+        <div style="width: 55.5%; border: 5px solid #a97874;">
+            <div>n개 아이템 찾음 | 검색 조건: "ex)정규세트(전체적인조건)" [#권총 X] [방어력1~2 X] [＠ 모두 지우기]</div>
+        </div>
+    </div>
     
-
-
-
 
     <div class=item_list>
         <div class=item_list_pd>

@@ -18,11 +18,15 @@ $(document).ready(function() {
     });
 
 
-    var vl1 = 0;
-    var vl2 = 100;
-    var stepv = 0.5;
+    //공격력 0(닭다리)~100(각목) 소수점있지만 step=1
+    //방어력 1 ~ 20
+    //공격속도 0.5~ 21.74 step>=0.1정도
+    //탄창 1 ~ 100
+    var stepv = 1;
     var minv = 0;
     var maxv = 100;
+    var vl1 = minv;
+    var vl2 = maxv;
     $("#ipt1").val("$" + vl1);
     $("#ipt2").val("$" + vl2);
     $("#slider").slider({
@@ -69,5 +73,12 @@ $(document).ready(function() {
         $("#slider").slider("values", [vl1,vl2]);
     });
 
+    
 
 });
+function myFunction() {
+    var x = document.createElement("BUTTON");
+    var t = document.createTextNode("Click me");
+    x.appendChild(t);
+    document.body.appendChild(x);
+}
