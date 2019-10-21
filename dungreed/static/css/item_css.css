@@ -10,6 +10,9 @@ p {
     height: 50px;
     background-color: red;
 } */
+#slider {
+    display: inline-block;
+}
 
 
 .item_list_pd {border: 5px solid #2b2639;}
