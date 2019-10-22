@@ -71,11 +71,9 @@ $(document).ready(function() {
         }
         $("#ipt2").val("$" + vl2);
         $("#slider").slider("values", [vl1,vl2]);
-    });
-
-    
-
+    });    
 });
+
 function myFunction() {
     var x = document.createElement("BUTTON");
     var t = document.createTextNode("Click me");

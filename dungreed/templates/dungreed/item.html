@@ -8,14 +8,33 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- slider -->
 <script src="{% static 'js/item_js.js' %}"></script>
-    <div>
+<script>
+    $(document).ready(function() {
+        var filterv = {0:0,"search":1};
+        if (filterv[0] == 0){
+            $(".item_element").css("display","inline-block");
+        }
+        $(".search").on("change", function () {//propertychange change keyup paste input
+            var value = this.value;
+            filterv["search"] = value;
+            "{% for i in item %}"
+                if ($("."+"{{i.image_name}}").children().text().includes(filterv["search"])){
+                    $("."+"{{i.image_name}}"+"_choose").css("display","inline-block");
+                } else {
+                    $("."+"{{i.image_name}}"+"_choose").css("display","none");
+                }
+            "{% endfor %}"
+        });
+    });
+</script>
+    <div>   <!-- 타이틀 -->
         <h1>아이템 사전</h1>
     </div>
 
-    <div class=item_filter>
+    <div class=item_filter> <!-- 아이템 필터 -->
         
         <div style="width: 55.5%; border: 5px solid #a97874;">
-            <input id="iptt" style="width: 50px;" placeholder="검색"></input>
+            <input class="search" style="width: 50px;" placeholder="검색"></input>
 
             <select class="state">
                 <option disabled selected>능력치</option>
@@ -51,10 +70,10 @@
     </div>
     
 
-    <div class=item_list>
+    <div class=item_list> <!-- 좌측에 표시되는 아이템 목록 -->
         <div class=item_list_pd>
             {% for i in item %}
-            <div align="center" class="item_element {{i.image_name}}_choose">
+            <div align="center" class="item_element {{i.image_name}}_choose" style="display:none;">
                 <div class={{i.image_name}}>
                     <img class={{i.image_name}} style="margin:0px 0px 15px 0px" src=\static\image\item\{{i.image_name}}.png width="100px" height="100px">
                     <p class={{i.image_name}} style="font-size: 13px;font-weight:bold;">{{ i.name }}</p>
@@ -64,19 +83,19 @@
         </div>
     </div>
     
-    <div class=item_detail><div class=pd1><div class=pd2><div class=pd3>
+    <div class=item_detail><div class=pd1><div class=pd2><div class=pd3> <!-- 우측에 아이템에 대한 자세한 설명 -->
     {% for i in item %}
     <div class={{i.image_name}}_detail style="display:none;">
-        <div align="center" class=item_name>
+        <div align="center" class="item_name {{i.image_name}}"> <!-- 아이템 이름 -->
             {% if i.grade == '전설' %}<div class=color_legend>
             {% elif i.grade == '희귀' %}<div class=color_rare>
             {% elif i.grade == '고급' %}<div class=color_highclass>
             {% else %}<div>
             {% endif %}{{i.name}}</div>
         </div>
-        <div class=tmp>
-            <div align="center" class=item_image><img src=\static\image\item\{{i.image_name}}.png width="100px" height="100px"></div>
-            <div class=item_state>
+        <div>
+            <div align="center" class=item_image><img src=\static\image\item\{{i.image_name}}.png width="100px" height="100px"></div> <!-- 아이템 이미지 -->
+            <div class=item_state> <!-- 아이템 능력치 -->
                 {% for j in jps.0|dvu:i.name %}
                     {{jps.1|dvu:i.name|dvu:j}} : <div style="display:inline-block;" class=color_yellow>{{jps.2|dvu:i.name|dvu:j}}</div><br>
                 {% endfor %}
@@ -88,7 +107,7 @@
             </div>
         </div>
         <div class=item_states>
-            <div class=item_option>
+            <div class="item_option {{i.image_name}}"> <!-- 아이템 특수 옵션 -->
                 {% for j in jpo.0|dvu:i.name %}
                     {% for x in jpo.2|dvu:i.name|dvu:j|rd %}
                         {% if jpo.2|dvu:i.name|dvu:j|cf == '초록' %}
@@ -113,12 +132,12 @@
                     {% endfor %}
                 {% endfor %}
             </div>
-            <div class=color_nature>
-                <p>{{i.grade}} 아이템</p>
-                <p>{{i.use}} <{{i.nature}}></p>
+            <div class="color_nature {{i.image_name}}">
+                <p>{{i.grade}} 아이템</p> <!-- 아이템 등급 -->
+                <p>{{i.use}} <{{i.nature}}></p> <!-- 아이템 사용방식, 아이템 성격 -->
             </div>
-            <p class=color_data>"{{i.data}}"</p>
-            <p class=color_tag>{{i.tag}}</p>
+            <p class="color_data {{i.image_name}}">"{{i.data}}"</p> <!-- 아이템 설명 -->
+            <p class="color_tag {{i.image_name}}">{{i.tag}}</p> <!-- 아이템 태그 -->
             <p class=color_group>{{i.group}}</p>
         </div>
     </div>
