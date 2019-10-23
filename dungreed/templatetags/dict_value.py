@@ -3,6 +3,21 @@ from django import template
 register = template.Library()
 
 
+
+@register.filter
+def tildemin(value):
+    if "~" in value:
+        return value.split()[0] 
+    else:
+        return value
+
+@register.filter
+def tildemax(value):
+    if "~" in value:
+        return value.split()[2] 
+    else:
+        return value
+
 @register.filter
 def dvu(value,arg):
     return value[arg]

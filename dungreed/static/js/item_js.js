@@ -27,8 +27,8 @@ $(document).ready(function() {
     var maxv = 100;
     var vl1 = minv;
     var vl2 = maxv;
-    $("#ipt1").val("$" + vl1);
-    $("#ipt2").val("$" + vl2);
+    $("#ipt1").val(vl1);
+    $("#ipt2").val(vl2);
     $("#slider").slider({
         range: true,
         values: [vl1,vl2],
@@ -36,14 +36,14 @@ $(document).ready(function() {
         min: minv,
         max: maxv,
         slide: function( event, ui ) {
-            $("#ipt1").val("$" + ui.values[0]);
+            $("#ipt1").val(ui.values[0]);
             vl1 = ui.values[0];
-            $("#ipt2").val("$" + ui.values[1]);
+            $("#ipt2").val(ui.values[1]);
             vl2 = ui.values[1];
         }
     });
     $("#ipt1").change(function () {
-        var value1 = this.value.substring(1);
+        var value1 = this.value;
         vl1 = parseFloat(value1);
         if (vl1 < minv) {
             vl1 = minv;
@@ -54,11 +54,11 @@ $(document).ready(function() {
         } else {
             vl1 = minv;
         }
-        $("#ipt1").val("$" + vl1);
+        $("#ipt1").val(vl1);
         $("#slider").slider("values", [vl1,vl2]);
     });
     $("#ipt2").change(function () {
-        var value2 = this.value.substring(1);
+        var value2 = this.value;
         vl2 = parseFloat(value2);
         if (vl2 > maxv) {
             vl2 = maxv;
@@ -69,7 +69,7 @@ $(document).ready(function() {
         } else {
             vl2 = maxv;
         }
-        $("#ipt2").val("$" + vl2);
+        $("#ipt2").val(vl2);
         $("#slider").slider("values", [vl1,vl2]);
     });    
 });

@@ -10,20 +10,40 @@
 <script src="{% static 'js/item_js.js' %}"></script>
 <script>
     $(document).ready(function() {
-        var filterv = {0:0,"search":1};
+        var schv = 0;
+        "{% for i in item %}"
+        schv += 1;
+        "{% endfor %}"
+        $(".schv").text(schv);
+
+        var filterv = [0];
         if (filterv[0] == 0){
             $(".item_element").css("display","inline-block");
         }
+        
+        var filtervv = [0];
+
         $(".search").on("change", function () {//propertychange change keyup paste input
             var value = this.value;
-            filterv["search"] = value;
+            schv = 0;
             "{% for i in item %}"
-                if ($("."+"{{i.image_name}}").children().text().includes(filterv["search"])){
+                // filtervv.push($("#ipt1").val() < $(".{{i.image_name}}"+filterv[ii]).text() && $(".{{i.image_name}}"+filterv[ii]).text() < $("#ipt2").val());
+                var ifsch = $("."+"{{i.image_name}}").children().text().includes(value) || $("."+"{{i.image_name}}").text().includes(value);
+                if ( ifsch ){
                     $("."+"{{i.image_name}}"+"_choose").css("display","inline-block");
+                    schv += 1;
                 } else {
                     $("."+"{{i.image_name}}"+"_choose").css("display","none");
                 }
             "{% endfor %}"
+            $(".schv").text(schv);
+            // style="background-color: crimson; border-radius: 15px;"
+            $(".searchv").text(value);
+        });
+
+        $( ".state" ).on( "change", function() {
+            var value = this.value;
+            filterv.push(value);
         });
     });
 </script>
@@ -38,11 +58,11 @@
 
             <select class="state">
                 <option disabled selected>능력치</option>
-                <option value="최소 공격력v">최소 공격력</option>
-                <option value="최대 공격력v">최대 공격력</option>
-                <option value="초당 공격 횟수v">초당 공격 횟수</option>
-                <option value="방어력v">방어력</option>
-                <option value="탄창v">탄창</option>
+                <option value="atkmin">최소 공격력</option>
+                <option value="atkmax">최대 공격력</option>
+                <option value="atkspd">초당 공격 횟수</option>
+                <option value="dps">방어력</option>
+                <option value="mgn">탄창</option>
             </select>
 
             <input id="ipt1" style="width: 50px;"></input>
@@ -53,7 +73,7 @@
 
             <div class="order_by" style="float:right;">
                 <a>정렬 기준 : </a>
-                <select class="state">
+                <select class="stateb">
                     <option value="이름v">이름</option>
                     <option value="평균 공격력v">평균 공격력</option>
                     <option value="공격력 편차v">공격력 편차</option>
@@ -65,7 +85,7 @@
         </div>
 
         <div style="width: 55.5%; border: 5px solid #a97874;">
-            <div>n개 아이템 찾음 | 검색 조건: "ex)정규세트(전체적인조건)" [#권총 X] [방어력1~2 X] [＠ 모두 지우기]</div>
+            <div><a class="schv"></a>개 찾음 | 검색 조건: "<a class="searchv"></a>" <a class='chsss'></a>[#권총 X] [방어력1~2 X] [＠ 모두 지우기]</div>
         </div>
     </div>
     
@@ -97,6 +117,10 @@
             <div align="center" class=item_image><img src=\static\image\item\{{i.image_name}}.png width="100px" height="100px"></div> <!-- 아이템 이미지 -->
             <div class=item_state> <!-- 아이템 능력치 -->
                 {% for j in jps.0|dvu:i.name %}
+                    {% if jps.1|dvu:i.name|dvu:j == '공격력' %}
+                    <a style="display: none;" class="{{i.image_name}}atkmin">{{jps.2|dvu:i.name|dvu:j|tildemin}}</a>
+                    <a style="display: none;" class="{{i.image_name}}atkmax">{{jps.2|dvu:i.name|dvu:j|tildemax}}</a>
+                    {% endif %}
                     {{jps.1|dvu:i.name|dvu:j}} : <div style="display:inline-block;" class=color_yellow>{{jps.2|dvu:i.name|dvu:j}}</div><br>
                 {% endfor %}
                 {% if jps.0|dvu:i.name|length < 1 %}<br><br><br><br>
@@ -136,7 +160,7 @@
                 <p>{{i.grade}} 아이템</p> <!-- 아이템 등급 -->
                 <p>{{i.use}} <{{i.nature}}></p> <!-- 아이템 사용방식, 아이템 성격 -->
             </div>
-            <p class="color_data {{i.image_name}}">"{{i.data}}"</p> <!-- 아이템 설명 -->
+            <p class="color_data">"{{i.data}}"</p> <!-- 아이템 설명 -->
             <p class="color_tag {{i.image_name}}">{{i.tag}}</p> <!-- 아이템 태그 -->
             <p class=color_group>{{i.group}}</p>
         </div>
