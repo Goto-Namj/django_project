@@ -16,20 +16,45 @@
         "{% endfor %}"
         $(".schv").text(schv);
 
-        var filterv = [0];
-        if (filterv[0] == 0){
-            $(".item_element").css("display","inline-block");
-        }
-        
-        var filtervv = [0];
+        $(".item_element").css("display","inline-block");
+
+        var filtervv = {"atkmin":[-1],"atkmax":[-1],"atkspd":[-1],"dps":[-1],"mgn":[-1],"search":[-1]};
+        var ifft = [1,1,1,1,1,1];
+
+
 
         $(".search").on("change", function () {//propertychange change keyup paste input
             var value = this.value;
+            filtervv["search"][0] = value;
+            var $div = $("<a class='aasdf' style='background-color: crimson; border-radius: 15px;'>"+value+"</a>");
+            $('#filters').append($div);
+            $filter();
+        });
+
+        $(".reqbtn").click(function(){
+            var value = $(".state").val();
+            filtervv[value] = [parseFloat($("#ipt1").val()),parseFloat($("#ipt2").val())];
+            $filter();
+        });
+        
+        $filter = function() {
             schv = 0;
             "{% for i in item %}"
-                // filtervv.push($("#ipt1").val() < $(".{{i.image_name}}"+filterv[ii]).text() && $(".{{i.image_name}}"+filterv[ii]).text() < $("#ipt2").val());
-                var ifsch = $("."+"{{i.image_name}}").children().text().includes(value) || $("."+"{{i.image_name}}").text().includes(value);
-                if ( ifsch ){
+                if (filtervv["search"][0] != -1){
+                    ifft[5] = $("."+"{{i.image_name}}").children().text().includes(filtervv["search"][0]) || $("."+"{{i.image_name}}").text().includes(filtervv["search"][0]);
+                } if (filtervv["atkmin"][0] != -1){
+                    ifft[0] = filtervv["atkmin"][0] <= parseFloat($("."+"{{i.image_name}}"+"atkmin").text()) && parseFloat($("."+"{{i.image_name}}"+"atkmin").text()) <= filtervv["atkmin"][1];
+                } if (filtervv["atkmax"][0] != -1){
+                    ifft[1] = filtervv["atkmax"][0] <= parseFloat($("."+"{{i.image_name}}"+"atkmax").text()) && parseFloat($("."+"{{i.image_name}}"+"atkmax").text()) <= filtervv["atkmax"][1];
+                } if (filtervv["atkspd"][0] != -1){
+                    ifft[2] = filtervv["atkspd"][0] <= parseFloat($("."+"{{i.image_name}}"+"atkspd").text()) && parseFloat($("."+"{{i.image_name}}"+"atkspd").text()) <= filtervv["atkspd"][1];
+                } if (filtervv["dps"][0] != -1){
+                    ifft[3] = filtervv["dps"][0] <= parseFloat($("."+"{{i.image_name}}"+"dps").text()) && parseFloat($("."+"{{i.image_name}}"+"dps").text()) <= filtervv["dps"][1];
+                } if (filtervv["mgn"][0] != -1){
+                    ifft[4] = filtervv["mgn"][0] <= parseFloat($("."+"{{i.image_name}}"+"mgn").text()) && parseFloat($("."+"{{i.image_name}}"+"mgn").text()) <= filtervv["mgn"][1];
+                }
+
+                if ( ifft[5] && ifft[0] && ifft[1] && ifft[2] && ifft[3] && ifft[4]){
                     $("."+"{{i.image_name}}"+"_choose").css("display","inline-block");
                     schv += 1;
                 } else {
@@ -37,15 +62,10 @@
                 }
             "{% endfor %}"
             $(".schv").text(schv);
-            // style="background-color: crimson; border-radius: 15px;"
             $(".searchv").text(value);
-        });
-
-        $( ".state" ).on( "change", function() {
-            var value = this.value;
-            filterv.push(value);
-        });
+        }
     });
+
 </script>
     <div>   <!-- 타이틀 -->
         <h1>아이템 사전</h1>
@@ -69,7 +89,7 @@
             <div id="slider" style="margin: 0px 20px; display: inline-block; width: 200px;"></div>
             <input id="ipt2" style="width: 50px;"></input>
 
-            <button type="button" id="myBtn" onclick="myFunction()" style="font-weight: bold;">✓✔</button>
+            <button type="button" class="reqbtn" style="font-weight: bold;">✓✔</button>
 
             <div class="order_by" style="float:right;">
                 <a>정렬 기준 : </a>
@@ -85,7 +105,12 @@
         </div>
 
         <div style="width: 55.5%; border: 5px solid #a97874;">
-            <div><a class="schv"></a>개 찾음 | 검색 조건: "<a class="searchv"></a>" <a class='chsss'></a>[#권총 X] [방어력1~2 X] [＠ 모두 지우기]</div>
+            <div> <a class="schv"></a>개 찾음 |
+                검색 조건: "<a class="searchv"></a>"
+                <span id="filters">
+                    
+                </span>
+            </div>
         </div>
     </div>
     
@@ -120,6 +145,9 @@
                     {% if jps.1|dvu:i.name|dvu:j == '공격력' %}
                     <a style="display: none;" class="{{i.image_name}}atkmin">{{jps.2|dvu:i.name|dvu:j|tildemin}}</a>
                     <a style="display: none;" class="{{i.image_name}}atkmax">{{jps.2|dvu:i.name|dvu:j|tildemax}}</a>
+                    {% endif %}
+                    {% if jps.1|dvu:i.name|dvu:j == '초당 공격 횟수' %}
+                    <a style="display: none;" class="{{i.image_name}}atkspd">{{jps.2|dvu:i.name|dvu:j}}</a>
                     {% endif %}
                     {{jps.1|dvu:i.name|dvu:j}} : <div style="display:inline-block;" class=color_yellow>{{jps.2|dvu:i.name|dvu:j}}</div><br>
                 {% endfor %}
