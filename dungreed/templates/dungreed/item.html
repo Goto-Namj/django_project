@@ -23,11 +23,14 @@
 
 
 
-        $(".search").on("change", function () {//propertychange change keyup paste input
+        $(".search").on("change", function () {//propertxychange change keyup paste input
             var value = this.value;
             filtervv["search"][0] = value;
+            $('.searchv').text(value);
+
             var $div = $("<a class='aasdf' style='background-color: crimson; border-radius: 15px;'>"+value+"</a>");
             $('#filters').append($div);
+            
             $filter();
         });
 
