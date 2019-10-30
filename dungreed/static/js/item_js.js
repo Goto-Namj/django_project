@@ -71,5 +71,5 @@ $(document).ready(function() {
         }
         $("#ipt2").val(vl2);
         $("#slider").slider("values", [vl1,vl2]);
-    });    
+    });
 });

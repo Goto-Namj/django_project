@@ -18,58 +18,82 @@
 
         $(".item_element").css("display","inline-block");
 
-        var filtervv = {"atkmin":[-1],"atkmax":[-1],"atkspd":[-1],"dps":[-1],"mgn":[-1],"search":[-1]};
+        var filtervv = {"atkmin":[-1,-1,-1],"atkmax":[-1,-1,-1],"atkspd":[-1,-1,-1],"dps":[-1,-1,-1],"mgn":[-1,-1,-1],"search":[-1,-1,-1]};
         var ifft = [1,1,1,1,1,1];
-
+        var ing = 0;
 
 
         $(".search").on("change", function () {//propertxychange change keyup paste input
             var value = this.value;
-            filtervv["search"][0] = value;
-            $('.searchv').text(value);
 
-            $('#filters').empty();
-            var $div = $("<a class='aasdf' style='background-color: crimson; border-radius: 15px;'>"+value+"</a>");
-            $('#filters').append($div);
-            
-            $filter();
+
+            $filter(value,"search");
         });
 
         $(".reqbtn").click(function(){
             var value = $(".state").val();
-            filtervv[value] = [parseFloat($("#ipt1").val()),parseFloat($("#ipt2").val())];
-            $filter();
+            var tmp = $("."+$(".state").val()).text() + " " + parseFloat($("#ipt1").val()) + "~" + parseFloat($("#ipt2").val());
+            
+
+            $filter(tmp,value);
+        });
+
+        $(document).on('click', 'a.nowfilter', function(e){
+            alert(e.currentTarget.id);  
+            $('.nowfilter').detach();
+            if(!$('.nowfilter').text()){
+                $('.everyfilter').detach();
+            }
         });
         
-        $filter = function() {
+        $filter = function(tmpvalue,isnull) {
+
+            if(isnull == "search"){
+                filtervv["search"] = [tmpvalue,-1,tmpvalue];
+                $('.searchv').text(tmpvalue);
+            } else {
+                filtervv[isnull] = [parseFloat($("#ipt1").val()), parseFloat($("#ipt2").val()), isnull];
+            }
+
+            if(filtervv[isnull][2] != -1){
+                var $div = $("<a id='"+filtervv[isnull][2]+"__' class='nowfilter' style='background-color: crimson; border-radius: 15px; padding:3px 10px;'>"+tmpvalue+"<span class='nowfilter' style='color: #ffff00;'> ✕</span></a>");
+                $('.filters').append($div);
+                $('.everyfilter').detach();
+                $div = $("<a class='everyfilter' style='background-color: yellow; border-radius: 15px; padding:3px 10px;'>모두 지우기 ✕</a>");
+                // $('.filters').empty();
+                $('.filters').append($div);
+            } else {
+                $('.nowfilter').detach();
+                $('.everyfilter').detach();
+            }
+
             schv = 0;
             "{% for i in item %}"
                 if (filtervv["search"][0] != -1){
-                    ifft[5] = $("."+"{{i.image_name}}").children().text().includes(filtervv["search"][0]) || $("."+"{{i.image_name}}").text().includes(filtervv["search"][0]);
+                    ifft[5] = $(".{{i.image_name}}").children().text().includes(filtervv["search"][0]) || $(".{{i.image_name}}").text().includes(filtervv["search"][0]);
                 } if (filtervv["atkmin"][0] != -1){
-                    ifft[0] = filtervv["atkmin"][0] <= parseFloat($("."+"{{i.image_name}}"+"atkmin").text()) && parseFloat($("."+"{{i.image_name}}"+"atkmin").text()) <= filtervv["atkmin"][1];
+                    ifft[0] = filtervv["atkmin"][0] <= parseFloat($(".{{i.image_name}}atkmin").text()) && parseFloat($(".{{i.image_name}}atkmin").text()) <= filtervv["atkmin"][1];
                 } if (filtervv["atkmax"][0] != -1){
-                    ifft[1] = filtervv["atkmax"][0] <= parseFloat($("."+"{{i.image_name}}"+"atkmax").text()) && parseFloat($("."+"{{i.image_name}}"+"atkmax").text()) <= filtervv["atkmax"][1];
+                    ifft[1] = filtervv["atkmax"][0] <= parseFloat($(".{{i.image_name}}atkmax").text()) && parseFloat($(".{{i.image_name}}atkmax").text()) <= filtervv["atkmax"][1];
                 } if (filtervv["atkspd"][0] != -1){
-                    ifft[2] = filtervv["atkspd"][0] <= parseFloat($("."+"{{i.image_name}}"+"atkspd").text()) && parseFloat($("."+"{{i.image_name}}"+"atkspd").text()) <= filtervv["atkspd"][1];
+                    ifft[2] = filtervv["atkspd"][0] <= parseFloat($(".{{i.image_name}}atkspd").text()) && parseFloat($(".{{i.image_name}}atkspd").text()) <= filtervv["atkspd"][1];
                 } if (filtervv["dps"][0] != -1){
-                    ifft[3] = filtervv["dps"][0] <= parseFloat($("."+"{{i.image_name}}"+"dps").text()) && parseFloat($("."+"{{i.image_name}}"+"dps").text()) <= filtervv["dps"][1];
+                    ifft[3] = filtervv["dps"][0] <= parseFloat($(".{{i.image_name}}dps").text()) && parseFloat($(".{{i.image_name}}dps").text()) <= filtervv["dps"][1];
                 } if (filtervv["mgn"][0] != -1){
-                    ifft[4] = filtervv["mgn"][0] <= parseFloat($("."+"{{i.image_name}}"+"mgn").text()) && parseFloat($("."+"{{i.image_name}}"+"mgn").text()) <= filtervv["mgn"][1];
+                    ifft[4] = filtervv["mgn"][0] <= parseFloat($(".{{i.image_name}}mgn").text()) && parseFloat($(".{{i.image_name}}mgn").text()) <= filtervv["mgn"][1];
                 }
 
                 if ( ifft[5] && ifft[0] && ifft[1] && ifft[2] && ifft[3] && ifft[4]){
-                    $("."+"{{i.image_name}}"+"_choose").css("display","inline-block");
+                    $(".{{i.image_name}}_choose").css("display","inline-block");
                     schv += 1;
                 } else {
-                    $("."+"{{i.image_name}}"+"_choose").css("display","none");
+                    $(".{{i.image_name}}_choose").css("display","none");
                 }
             "{% endfor %}"
             $(".schv").text(schv);
             $(".searchv").text(value);
         }
     });
-
 </script>
     <div>   <!-- 타이틀 -->
         <h1>아이템 사전</h1>
@@ -82,11 +106,11 @@
 
             <select class="state">
                 <option disabled selected>능력치</option>
-                <option value="atkmin">최소 공격력</option>
-                <option value="atkmax">최대 공격력</option>
-                <option value="atkspd">초당 공격 횟수</option>
-                <option value="dps">방어력</option>
-                <option value="mgn">탄창</option>
+                <option value="atkmin" class="atkmin">최소 공격력</option>
+                <option value="atkmax" class="atkmax">최대 공격력</option>
+                <option value="atkspd" class="atkspd">초당 공격 횟수</option>
+                <option value="dps" class="dps">방어력</option>
+                <option value="mgn" class="mgn">탄창</option>
             </select>
 
             <input id="ipt1" style="width: 50px;"></input>
@@ -108,11 +132,12 @@
             </div>
         </div>
 
-        <div style="width: 55.5%; border: 5px solid #a97874;">
+        <div style="width: 55.5%; height:30px; border: 5px solid #a97874; padding:8.5px 10px 0px 10px;">
             <div> <a class="schv"></a>개 찾음 |
                 검색 조건: "<a class="searchv"></a>"
-                <span id="filters">
-                    
+                <span class="filters">
+                    <span class="nowfilter"></span>
+                    <span class="everyfilter"></span>
                 </span>
             </div>
         </div>
