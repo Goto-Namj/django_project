@@ -9,131 +9,168 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- slider -->
 <script src="{% static 'js/item_js.js' %}"></script>
 <script>
-    $(document).ready(function() {
-        var schv = 0;
-        "{% for i in item %}"
-        schv += 1;
-        "{% endfor %}"
-        $(".schv").text(schv);
-
-        $(".item_element").css("display","inline-block");
-
-        var filtervv = {"atkmin":[-1,-1,-1],"atkmax":[-1,-1,-1],"atkspd":[-1,-1,-1],"dps":[-1,-1,-1],"mgn":[-1,-1,-1],"search":[-1,-1,-1]};
-        var ifft = {"atkmin":1,"atkmax":1,"atkspd":1,"dps":1,"mgn":1,"search":1};
+$(document).ready(function() {
+    var schv = 0;
+    "{% for i in item %}"
+    schv += 1;
+    "{% endfor %}"
+    $(".schv").text(schv);
+    
 
 
-        $(".search").keydown(function(key) {
-            if (key.keyCode == 13) {
-                var value = this.value;
-                $(".search").val("");
+    $(".item_element").css("display","inline-block");
 
-                $filterwriter(value,"search");
-                $filter();
-            }
-        });
+    var filtervv = {"atkmin":[-1,-1,-1],"atkmax":[-1,-1,-1],"atkspd":[-1,-1,-1],"dps":[-1,-1,-1],"mgn":[-1,-1,-1],"search":[-1,-1,-1]};
+    var ifft = {"atkmin":1,"atkmax":1,"atkspd":1,"dps":1,"mgn":1,"search":1};
 
-        $(".reqbtn").click(function(){
-            var value = $(".state").val();
-            var tmp = $("."+$(".state").val()).text() + " " + parseFloat($("#ipt1").val()) + "~" + parseFloat($("#ipt2").val());
-            
 
-            $filterwriter(tmp,value);
+    $(".search").keydown(function(key) {
+        if (key.keyCode == 13) {
+            var value = this.value;
+            $(".search").val("");
+
+            $filterwriter(value,"search");
             $filter();
-        });
-
-        $(document).on('click', 'a.nowfilter', function(e){
-            var et = e.currentTarget.id;
-            $('#'+et).detach();
-            if(!$('.nowfilter').text()){
-                $('.everyfilter').detach();
-            }
-            if(et.substring(2)=="search"){
-                $('.searchv').text("");
-            }
-            filtervv[et.substring(2)] = [-1,-1,-1];
-            ifft[et.substring(2)] = 1;
-            $filter();
-        });
-
-        $(document).on('click', 'a.everyfilter', function(){
-            $('.nowfilter').detach();
-            if(!$('.nowfilter').text()){
-                $('.everyfilter').detach();
-            }
-            filtervv = {"atkmin":[-1,-1,-1],"atkmax":[-1,-1,-1],"atkspd":[-1,-1,-1],"dps":[-1,-1,-1],"mgn":[-1,-1,-1],"search":[-1,-1,-1]};
-            ifft = {"atkmin":1,"atkmax":1,"atkspd":1,"dps":1,"mgn":1,"search":1};
-            $('.searchv').text("");
-            $filter();
-        });
-
-        $filterwriter = function(tmpvalue,isnull) {
-            if(tmpvalue == ""){
-                $('#__'+isnull).detach();
-                filtervv["search"] = [-1,-1,-1];
-                ifft["search"] = 1;
-                if(!$('.nowfilter').text()){
-                    $('.everyfilter').detach();
-                }
-                $('.searchv').text(tmpvalue);
-            } else if(filtervv[isnull][2] == -1){
-                if(isnull == "search"){
-                    filtervv["search"] = [tmpvalue,-1,tmpvalue];
-                    $('.searchv').text(tmpvalue);
-                } else {
-                    filtervv[isnull] = [parseFloat($("#ipt1").val()), parseFloat($("#ipt2").val()), isnull];
-                }
-                var $div = $("<a id='__"+isnull+"' class='nowfilter' style='background-color: crimson; border-radius: 15px; padding:3px 10px;'>"+tmpvalue+"<span class='nowfilter' style='color: #ffff00;'> ✕</span></a>");
-                $('.filters').append($div);
-                $('.everyfilter').detach();
-                $div = $("<a class='everyfilter' style='background-color: yellow; border-radius: 15px; padding:3px 10px;'>모두 지우기 ✕</a>");
-                $('.filters').append($div);
-
-            } else {
-
-                $('#__'+isnull).detach();
-                
-                if(isnull == "search"){
-                    filtervv["search"] = [tmpvalue,-1,tmpvalue];
-                    $('.searchv').text(tmpvalue);
-                } else {
-                    filtervv[isnull] = [parseFloat($("#ipt1").val()), parseFloat($("#ipt2").val()), isnull];
-                }
-
-                var $div = $("<a id='__"+isnull+"' class='nowfilter' style='background-color: crimson; border-radius: 15px; padding:3px 10px;'>"+tmpvalue+"<span class='nowfilter' style='color: #ffff00;'> ✕</span></a>");
-                $('.filters').append($div);
-                $('.everyfilter').detach();
-                $div = $("<a class='everyfilter' style='background-color: yellow; border-radius: 15px; padding:3px 10px;'>모두 지우기 ✕</a>");
-                $('.filters').append($div);
-            }
-        }
-        
-        $filter = function() {
-            schv = 0;
-            "{% for i in item %}"
-                if (filtervv["search"][0] != -1){
-                    ifft["search"] = $(".{{i.image_name}}").children().text().includes(filtervv["search"][0]) || $(".{{i.image_name}}").text().includes(filtervv["search"][0]);
-                } if (filtervv["atkmin"][0] != -1){
-                    ifft["atkmin"] = filtervv["atkmin"][0] <= parseFloat($(".{{i.image_name}}atkmin").text()) && parseFloat($(".{{i.image_name}}atkmin").text()) <= filtervv["atkmin"][1];
-                } if (filtervv["atkmax"][0] != -1){
-                    ifft["atkmax"] = filtervv["atkmax"][0] <= parseFloat($(".{{i.image_name}}atkmax").text()) && parseFloat($(".{{i.image_name}}atkmax").text()) <= filtervv["atkmax"][1];
-                } if (filtervv["atkspd"][0] != -1){
-                    ifft["atkspd"] = filtervv["atkspd"][0] <= parseFloat($(".{{i.image_name}}atkspd").text()) && parseFloat($(".{{i.image_name}}atkspd").text()) <= filtervv["atkspd"][1];
-                } if (filtervv["dps"][0] != -1){
-                    ifft["dps"] = filtervv["dps"][0] <= parseFloat($(".{{i.image_name}}dps").text()) && parseFloat($(".{{i.image_name}}dps").text()) <= filtervv["dps"][1];
-                } if (filtervv["mgn"][0] != -1){
-                    ifft["mgn"] = filtervv["mgn"][0] <= parseFloat($(".{{i.image_name}}mgn").text()) && parseFloat($(".{{i.image_name}}mgn").text()) <= filtervv["mgn"][1];
-                }
-
-                if ( ifft["search"] && ifft["atkmin"] && ifft["atkmax"] && ifft["atkspd"] && ifft["dps"] && ifft["mgn"]){
-                    $(".{{i.image_name}}_choose").css("display","inline-block");
-                    schv += 1;
-                } else {
-                    $(".{{i.image_name}}_choose").css("display","none");
-                }
-            "{% endfor %}"
-            $(".schv").text(schv);
         }
     });
+
+    $(".reqbtn").click(function(){
+        var value = $(".state").val();
+        var tmp = $("."+$(".state").val()).text() + " " + parseFloat($("#ipt1").val()) + "~" + parseFloat($("#ipt2").val());
+        
+
+        $filterwriter(tmp,value);
+        $filter();
+    });
+
+    $(document).on('click', 'a.nowfilter', function(e){
+        var et = e.currentTarget.id;
+        $('#'+et).detach();
+        if(!$('.nowfilter').text()){
+            $('.everyfilter').detach();
+        }
+        if(et.substring(2)=="search"){
+            $('.searchv').text("");
+        }
+        filtervv[et.substring(2)] = [-1,-1,-1];
+        ifft[et.substring(2)] = 1;
+        $filter();
+    });
+
+    $(document).on('click', 'a.everyfilter', function(){
+        $('.nowfilter').detach();
+        if(!$('.nowfilter').text()){
+            $('.everyfilter').detach();
+        }
+        filtervv = {"atkmin":[-1,-1,-1],"atkmax":[-1,-1,-1],"atkspd":[-1,-1,-1],"dps":[-1,-1,-1],"mgn":[-1,-1,-1],"search":[-1,-1,-1]};
+        ifft = {"atkmin":1,"atkmax":1,"atkspd":1,"dps":1,"mgn":1,"search":1};
+        $('.searchv').text("");
+        $filter();
+    });
+
+    $filterwriter = function(tmpvalue,isnull) {
+        if(tmpvalue == ""){
+            $('#__'+isnull).detach();
+            filtervv["search"] = [-1,-1,-1];
+            ifft["search"] = 1;
+            if(!$('.nowfilter').text()){
+                $('.everyfilter').detach();
+            }
+            $('.searchv').text(tmpvalue);
+        } else if(filtervv[isnull][2] == -1){
+            if(isnull == "search"){
+                filtervv["search"] = [tmpvalue,-1,tmpvalue];
+                $('.searchv').text(tmpvalue);
+            } else {
+                filtervv[isnull] = [parseFloat($("#ipt1").val()), parseFloat($("#ipt2").val()), isnull];
+            }
+            var $div = $("<a id='__"+isnull+"' class='nowfilter' style='background-color: crimson; border-radius: 15px; padding:3px 10px;'>"+tmpvalue+"<span class='nowfilter' style='color: #ffff00;'> ✕</span></a>");
+            $('.filters').append($div);
+            $('.everyfilter').detach();
+            $div = $("<a class='everyfilter' style='background-color: yellow; border-radius: 15px; padding:3px 10px;'>모두 지우기 ✕</a>");
+            $('.filters').append($div);
+
+        } else {
+
+            $('#__'+isnull).detach();
+            
+            if(isnull == "search"){
+                filtervv["search"] = [tmpvalue,-1,tmpvalue];
+                $('.searchv').text(tmpvalue);
+            } else {
+                filtervv[isnull] = [parseFloat($("#ipt1").val()), parseFloat($("#ipt2").val()), isnull];
+            }
+
+            var $div = $("<a id='__"+isnull+"' class='nowfilter' style='background-color: crimson; border-radius: 15px; padding:3px 10px;'>"+tmpvalue+"<span class='nowfilter' style='color: #ffff00;'> ✕</span></a>");
+            $('.filters').append($div);
+            $('.everyfilter').detach();
+            $div = $("<a class='everyfilter' style='background-color: yellow; border-radius: 15px; padding:3px 10px;'>모두 지우기 ✕</a>");
+            $('.filters').append($div);
+        }
+    }
+
+    $filter = function() {
+        schv = 0;
+        "{% for i in item %}"
+            if (filtervv["search"][0] != -1){
+                ifft["search"] = $(".{{i.image_name}}").children().text().includes(filtervv["search"][0]) || $(".{{i.image_name}}").text().includes(filtervv["search"][0]);
+            } if (filtervv["atkmin"][0] != -1){
+                ifft["atkmin"] = filtervv["atkmin"][0] <= parseFloat($(".{{i.image_name}}atkmin").text()) && parseFloat($(".{{i.image_name}}atkmin").text()) <= filtervv["atkmin"][1];
+            } if (filtervv["atkmax"][0] != -1){
+                ifft["atkmax"] = filtervv["atkmax"][0] <= parseFloat($(".{{i.image_name}}atkmax").text()) && parseFloat($(".{{i.image_name}}atkmax").text()) <= filtervv["atkmax"][1];
+            } if (filtervv["atkspd"][0] != -1){
+                ifft["atkspd"] = filtervv["atkspd"][0] <= parseFloat($(".{{i.image_name}}atkspd").text()) && parseFloat($(".{{i.image_name}}atkspd").text()) <= filtervv["atkspd"][1];
+            } if (filtervv["dps"][0] != -1){
+                ifft["dps"] = filtervv["dps"][0] <= parseFloat($(".{{i.image_name}}dps").text()) && parseFloat($(".{{i.image_name}}dps").text()) <= filtervv["dps"][1];
+            } if (filtervv["mgn"][0] != -1){
+                ifft["mgn"] = filtervv["mgn"][0] <= parseFloat($(".{{i.image_name}}mgn").text()) && parseFloat($(".{{i.image_name}}mgn").text()) <= filtervv["mgn"][1];
+            }
+
+            if ( ifft["search"] && ifft["atkmin"] && ifft["atkmax"] && ifft["atkspd"] && ifft["dps"] && ifft["mgn"]){
+                $(".{{i.image_name}}_choose").css("display","inline-block");
+                schv += 1;
+            } else {
+                $(".{{i.image_name}}_choose").css("display","none");
+            }
+        "{% endfor %}"
+        $(".schv").text(schv);
+    }
+
+    $(".ordbtn").click(function(){
+        var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+        list = document.getElementsByClassName("item_list")[0];
+        switching = true;
+        dir = "asc"; 
+        while (switching) {
+            switching = false;
+            b = list.getElementsByTagName("div");
+            for (i = 0; i < (b.length - 1); i++) {
+            shouldSwitch = false;
+            if (dir == "asc") {
+                if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+                }
+            } else if (dir == "desc") {
+                if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
+                shouldSwitch= true;
+                break;
+                }
+            }
+            }
+            if (shouldSwitch) {
+            b[i].parentNode.insertBefore(b[i + 1], b[i]);
+            switching = true;
+            switchcount ++;
+            } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+            }
+        }
+    });
+});
 </script>
     <div>   <!-- 타이틀 -->
         <h1>아이템 사전</h1>
@@ -168,7 +205,7 @@
                     <option value="초당 공격 횟수v">초당 공격 횟수</option>
                 </select>
 
-                <button type="button" class="myBtn" onclick="myFunction()" style="font-weight: bold;">△</button>
+                <button type="button" class="ordbtn" style="font-weight: bold;">△</button>
             </div>
         </div>
 
