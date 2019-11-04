@@ -4,7 +4,6 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/item_css.css' %}">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> <!-- slider -->
-<link rel="stylesheet" href="/resources/demos/style.css"> <!-- slider -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- slider -->
 <script src="{% static 'js/item_js.js' %}"></script>
@@ -136,40 +135,7 @@ $(document).ready(function() {
         $(".schv").text(schv);
     }
 
-    $(".ordbtn").click(function(){
-        var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
-        list = document.getElementsByClassName("item_list_pd")[0];
-        switching = true;
-        dir = "asc"; 
-        while (switching) {
-            switching = false;
-            b = list.getElementsByClassName("item_element");
-            for (i = 0; i < (b.length - 1); i++) {
-            shouldSwitch = false;
-            if (dir == "asc") {
-                if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
-                shouldSwitch = true;
-                break;
-                }
-            } else if (dir == "desc") {
-                if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
-                shouldSwitch= true;
-                break;
-                }
-            }
-            }
-            if (shouldSwitch) {
-            b[i].parentNode.insertBefore(b[i + 1], b[i]);
-            switching = true;
-            switchcount ++;
-            } else {
-            if (switchcount == 0 && dir == "asc") {
-                dir = "desc";
-                switching = true;
-            }
-            }
-        }
-    });
+
 });
 </script>
     <div>   <!-- 타이틀 -->
@@ -200,9 +166,6 @@ $(document).ready(function() {
                 <a>정렬 기준 : </a>
                 <select class="stateb">
                     <option value="이름v">이름</option>
-                    <option value="평균 공격력v">평균 공격력</option>
-                    <option value="공격력 편차v">공격력 편차</option>
-                    <option value="초당 공격 횟수v">초당 공격 횟수</option>
                 </select>
 
                 <button type="button" class="ordbtn" style="font-weight: bold;">△</button>
