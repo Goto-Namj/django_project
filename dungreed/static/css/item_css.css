@@ -12,6 +12,8 @@ p {
 } */
 #slider {
     display: inline-block;
+    margin: 0px 20px;
+    width: 200px;
 }
 
 

@@ -42,7 +42,7 @@ $(document).ready(function() {
         $filter();
     });
 
-    $(document).on('click', 'a.nowfilter', function(e){
+    $(document).on('click', 'div.nowfilter', function(e){
         var et = e.currentTarget.id;
         $('#'+et).detach();
         if(!$('.nowfilter').text()){
@@ -83,7 +83,7 @@ $(document).ready(function() {
             } else {
                 filtervv[isnull] = [parseFloat($("#ipt1").val()), parseFloat($("#ipt2").val()), isnull];
             }
-            var $div = $("<a id='__"+isnull+"' class='nowfilter' style='background-color: crimson; border-radius: 15px; padding:3px 10px;'>"+tmpvalue+"<span class='nowfilter' style='color: #ffff00;'> ✕</span></a>");
+            var $div = $("<div id='__"+isnull+"' class='nowfilter' style='text-rendering: auto; word-break:break-all;  display: inline-flex; background-color: crimson; border-radius: 15px; padding:3px 10px;'>"+tmpvalue+"<div class='nowfilter' style='display: inline-block; color: #ffff00;'> ✕</div></div>");
             $('.filters').append($div);
             $('.everyfilter').detach();
             $div = $("<a class='everyfilter' style='background-color: yellow; border-radius: 15px; padding:3px 10px;'>모두 지우기 ✕</a>");
@@ -157,7 +157,7 @@ $(document).ready(function() {
             </select>
 
             <input id="ipt1" style="width: 50px;"></input>
-            <div id="slider" style="margin: 0px 20px; display: inline-block; width: 200px;"></div>
+            <div id="slider"></div>
             <input id="ipt2" style="width: 50px;"></input>
 
             <button type="button" class="reqbtn" style="font-weight: bold;">✓✔</button>
