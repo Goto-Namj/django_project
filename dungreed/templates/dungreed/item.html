@@ -33,7 +33,7 @@ $(document).ready(function() {
         }
     });
 
-    $(".reqbtn").click(function(){
+    $(".reqbtn").click(function() {
         var value = $(".state").val();
         var tmp = $("."+$(".state").val()).text() + " " + parseFloat($("#ipt1").val()) + "~" + parseFloat($("#ipt2").val());
         
@@ -42,7 +42,7 @@ $(document).ready(function() {
         $filter();
     });
 
-    $(document).on('click', 'div.nowfilter', function(e){
+    $(document).on('click', 'div.nowfilter', function(e) {
         var et = e.currentTarget.id;
         $('#'+et).detach();
         if(!$('.nowfilter').text()){
@@ -56,7 +56,7 @@ $(document).ready(function() {
         $filter();
     });
 
-    $(document).on('click', 'a.everyfilter', function(){
+    $(document).on('click', 'div.everyfilter', function() {
         $('.nowfilter').detach();
         if(!$('.nowfilter').text()){
             $('.everyfilter').detach();
@@ -76,34 +76,20 @@ $(document).ready(function() {
                 $('.everyfilter').detach();
             }
             $('.searchv').text(tmpvalue);
-        } else if(filtervv[isnull][2] == -1){
-            if(isnull == "search"){
-                filtervv["search"] = [tmpvalue,-1,tmpvalue];
-                $('.searchv').text(tmpvalue);
-            } else {
-                filtervv[isnull] = [parseFloat($("#ipt1").val()), parseFloat($("#ipt2").val()), isnull];
-            }
-            var $div = $("<div id='__"+isnull+"' class='nowfilter' style='text-rendering: auto; word-break:break-all;  display: inline-flex; background-color: crimson; border-radius: 15px; padding:3px 10px;'>"+tmpvalue+"<div class='nowfilter' style='display: inline-block; color: #ffff00;'> ✕</div></div>");
-            $('.filters').append($div);
-            $('.everyfilter').detach();
-            $div = $("<a class='everyfilter' style='background-color: yellow; border-radius: 15px; padding:3px 10px;'>모두 지우기 ✕</a>");
-            $('.filters').append($div);
-
         } else {
-
-            $('#__'+isnull).detach();
-            
+            if(filtervv[isnull][2] != -1){
+                $('#__'+isnull).detach();
+            }
             if(isnull == "search"){
                 filtervv["search"] = [tmpvalue,-1,tmpvalue];
                 $('.searchv').text(tmpvalue);
             } else {
                 filtervv[isnull] = [parseFloat($("#ipt1").val()), parseFloat($("#ipt2").val()), isnull];
             }
-
-            var $div = $("<a id='__"+isnull+"' class='nowfilter' style='background-color: crimson; border-radius: 15px; padding:3px 10px;'>"+tmpvalue+"<span class='nowfilter' style='color: #ffff00;'> ✕</span></a>");
+            var $div = $("<div id='__"+isnull+"' class='nowfilter filter_c' style='background-color: #a97874;'>"+tmpvalue+" ✕</div>");
             $('.filters').append($div);
             $('.everyfilter').detach();
-            $div = $("<a class='everyfilter' style='background-color: yellow; border-radius: 15px; padding:3px 10px;'>모두 지우기 ✕</a>");
+            $div = $("<div class='everyfilter filter_c' style='background-color: #654a59;'>모두 지우기</div>");
             $('.filters').append($div);
         }
     }
@@ -144,39 +130,44 @@ $(document).ready(function() {
 
     <div class=item_filter> <!-- 아이템 필터 -->
         
-        <div style="width: 55.5%; border: 5px solid #a97874;">
-            <input class="search" style="width: 50px;" placeholder="검색"></input>
+        <div class="item_filters_c">
 
-            <select class="state">
-                <option disabled selected>능력치</option>
-                <option value="atkmin" class="atkmin">최소 공격력</option>
-                <option value="atkmax" class="atkmax">최대 공격력</option>
-                <option value="atkspd" class="atkspd">초당 공격 횟수</option>
-                <option value="dps" class="dps">방어력</option>
-                <option value="mgn" class="mgn">탄창</option>
-            </select>
+            <input class="search" style="max-width: 150px;" placeholder="검색"></input>
 
-            <input id="ipt1" style="width: 50px;"></input>
-            <div id="slider"></div>
-            <input id="ipt2" style="width: 50px;"></input>
-
-            <button type="button" class="reqbtn" style="font-weight: bold;">✓✔</button>
-
-            <div class="order_by" style="float:right;">
-                <a>정렬 기준 : </a>
-                <select class="stateb">
-                    <option value="이름v">이름</option>
+            <div style="float:right;">
+                <select class="state">
+                    <option disabled selected>능력치</option>
+                    <option value="atkmin" class="atkmin">최소 공격력</option>
+                    <option value="atkmax" class="atkmax">최대 공격력</option>
+                    <option value="atkspd" class="atkspd">초당 공격 횟수</option>
+                    <option value="dps" class="dps">방어력</option>
+                    <option value="mgn" class="mgn">탄창</option>
                 </select>
 
-                <button type="button" class="ordbtn" style="font-weight: bold;">△</button>
+                <input id="ipt1" style="width: 30px;"></input>
+                <div id="slider"></div>
+                <input id="ipt2" style="width: 30px;"></input>
+
+                <button type="button" class="reqbtn" style="font-weight: bold;">✓</button>
             </div>
+
         </div>
 
-        <div style="width: 55.5%; height:30px; border: 5px solid #a97874; padding:8.5px 10px 0px 10px;">
-            <div> <a class="schv"></a>개 찾음 |
-                검색 조건: "<a class="searchv"></a>"
-                <span class="filters">
+        <div class="item_filters_c">
+            <div style="padding:8.5px 10px;"> 
+                <div class="order_by" style="float:right;">
+                    <a>정렬 기준 : </a>
+                    <select class="stateb">
+                        <option value="이름v">이름</option>
+                    </select>
+    
+                    <button type="button" class="ordbtn" style="font-weight: bold;">△</button>
+                </div>
+                
+                <span style="margin:5px; padding: 3px 0px;">
+                    <a class="schv"></a>개 찾음 | 검색 조건: "<a class="searchv"></a>"
                 </span>
+                <span class="filters"></span>
             </div>
         </div>
     </div>
@@ -215,6 +206,12 @@ $(document).ready(function() {
                     {% endif %}
                     {% if jps.1|dvu:i.name|dvu:j == '초당 공격 횟수' %}
                     <a style="display: none;" class="{{i.image_name}}atkspd">{{jps.2|dvu:i.name|dvu:j}}</a>
+                    {% endif %}
+                    {% if jps.1|dvu:i.name|dvu:j == '방어력' %}
+                    <a style="display: none;" class="{{i.image_name}}dps">{{jps.2|dvu:i.name|dvu:j}}</a>
+                    {% endif %}
+                    {% if jps.1|dvu:i.name|dvu:j == '탄창' %}
+                    <a style="display: none;" class="{{i.image_name}}mgn">{{jps.2|dvu:i.name|dvu:j}}</a>
                     {% endif %}
                     {{jps.1|dvu:i.name|dvu:j}} : <div style="display:inline-block;" class=color_yellow>{{jps.2|dvu:i.name|dvu:j}}</div><br>
                 {% endfor %}

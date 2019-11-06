@@ -10,11 +10,25 @@ $(document).ready(function() {
 
 
     var chd$ = $('.item_element').children();
-    $(chd$).click(function(){
+    var clicked;
+    $(chd$).click(function() {
+        clicked = event.target.className;
         $(".pd3").children().css("display","none");
         $(".item_list_pd").children().removeClass('item_element_choose');
-        $("."+event.target.className+"_detail").css("display","block");
-        $("."+event.target.className+"_choose").addClass('item_element_choose');
+        $("."+clicked+"_detail").css("display","block");
+        $("."+clicked+"_choose").addClass('item_element_choose');
+    });
+
+    $(chd$).mouseenter(function() {
+        if(clicked!=event.target.className){
+            $("."+event.target.className+"_choose").addClass('item_element_choose');
+        }
+    });
+
+    $(chd$).mouseleave(function() {
+        if(clicked!=event.target.className){
+            $("."+event.target.className+"_choose").removeClass('item_element_choose');
+        }
     });
 
 
@@ -42,7 +56,7 @@ $(document).ready(function() {
             vl2 = ui.values[1];
         }
     });
-    $("#ipt1").change(function () {
+    $("#ipt1").change(function() {
         var value1 = this.value;
         vl1 = parseFloat(value1);
         if (vl1 < minv) {
@@ -57,7 +71,7 @@ $(document).ready(function() {
         $("#ipt1").val(vl1);
         $("#slider").slider("values", [vl1,vl2]);
     });
-    $("#ipt2").change(function () {
+    $("#ipt2").change(function() {
         var value2 = this.value;
         vl2 = parseFloat(value2);
         if (vl2 > maxv) {
@@ -73,7 +87,7 @@ $(document).ready(function() {
         $("#slider").slider("values", [vl1,vl2]);
     });
 
-    $(".ordbtn").click(function(){
+    $(".ordbtn").click(function() {
         $order("item_list","item_element");
     });
 
@@ -113,4 +127,13 @@ $(document).ready(function() {
             }
         }
     }
+
+    $(document).on('mouseenter', '.nowfilter', function() {
+        $("#"+event.target.id).css("background-color","#a54bff");});
+    $(document).on('mouseleave', '.nowfilter', function() {
+        $("#"+event.target.id).css("background-color","#a97874");});
+    $(document).on('mouseenter', '.everyfilter', function() {
+        $('.everyfilter').css("background-color","#477eff");});
+    $(document).on('mouseleave', '.everyfilter', function() {
+        $('.everyfilter').css("background-color","#654a59");});
 });

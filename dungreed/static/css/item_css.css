@@ -5,17 +5,27 @@ p {
     margin: 0px;
 }
 
-/* .item_filter {
-    width: 100%;
-    height: 50px;
-    background-color: red;
-} */
+.item_filters_c {
+    width: 55.5%;
+    height: auto;
+    border: 5px solid #654a59;
+    margin: 5px 0px;
+}
+
 #slider {
     display: inline-block;
     margin: 0px 20px;
     width: 200px;
 }
 
+.filter_c {
+    cursor: pointer;
+    word-break: break-word;
+    margin: 5px;
+    padding: 3px 10px;
+    display: inline-flex;
+    border-radius: 15px;
+}
 
 .item_list_pd {border: 5px solid #2b2639;}
 .item_list {
@@ -24,7 +34,7 @@ p {
     box-sizing: content-box;
     border: 5px solid #654a59;
     display: inline-block;
-    background-color:#332b3e;
+    background-color: #332b3e;
 }
 .item_element {
     cursor: pointer;
