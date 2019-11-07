@@ -86,7 +86,7 @@ $(document).ready(function() {
             } else {
                 filtervv[isnull] = [parseFloat($("#ipt1").val()), parseFloat($("#ipt2").val()), isnull];
             }
-            var $div = $("<div id='__"+isnull+"' class='nowfilter filter_c' style='background-color: #a97874;'>"+tmpvalue+" ✕</div>");
+            var $div = $("<div id='__"+isnull+"' class='nowfilter filter_c' style='background-color: #a97874;'>"+tmpvalue+" ✕</div> ");
             $('.filters').append($div);
             $('.everyfilter').detach();
             $div = $("<div class='everyfilter filter_c' style='background-color: #654a59;'>모두 지우기</div>");
@@ -131,43 +131,45 @@ $(document).ready(function() {
     <div class=item_filter> <!-- 아이템 필터 -->
         
         <div class="item_filters_c">
+            <div style="padding:8.5px 15px;"> 
+                <input class="search margin50" style="max-width: 150px;" placeholder="검색"></input>
 
-            <input class="search" style="max-width: 150px;" placeholder="검색"></input>
+                <div style="float:right;">
+                    <select class="state filters_tiny_adjust margin50">
+                        <option style="display: none" disabled selected>능력치</option>
+                        <option value="atkmin" class="atkmin">최소 공격력</option>
+                        <option value="atkmax" class="atkmax">최대 공격력</option>
+                        <option value="atkspd" class="atkspd">초당 공격 횟수</option>
+                        <option value="dps" class="dps">방어력</option>
+                        <option value="mgn" class="mgn">탄창</option>
+                    </select>
+                    
+                    <input class="filters_tiny_adjust margin50" id="ipt1"></input>
+                    <div class="sliderpd margin50">
+                        <div id="slider"></div>
+                    </div>
+                    <input class="filters_tiny_adjust margin50" id="ipt2"></input>
 
-            <div style="float:right;">
-                <select class="state">
-                    <option disabled selected>능력치</option>
-                    <option value="atkmin" class="atkmin">최소 공격력</option>
-                    <option value="atkmax" class="atkmax">최대 공격력</option>
-                    <option value="atkspd" class="atkspd">초당 공격 횟수</option>
-                    <option value="dps" class="dps">방어력</option>
-                    <option value="mgn" class="mgn">탄창</option>
-                </select>
-
-                <input id="ipt1" style="width: 30px;"></input>
-                <div id="slider"></div>
-                <input id="ipt2" style="width: 30px;"></input>
-
-                <button type="button" class="reqbtn" style="font-weight: bold;">✓</button>
+                    <button type="button" class="filters_tiny_adjust reqbtn margin50" style="font-weight: bold;">✓</button>
+                </div>
             </div>
-
         </div>
 
         <div class="item_filters_c">
-            <div style="padding:8.5px 10px;"> 
-                <div class="order_by" style="float:right;">
-                    <a>정렬 기준 : </a>
-                    <select class="stateb">
+            <div style="padding:8.5px 15px;">
+                <div class="order_by" style="position: relative; float: right; display: inline-block;">
+                    <a>정렬 기준 : 이름</a>
+                    <!-- <select class="stateb margin50" style="top: 0px !important;">
                         <option value="이름v">이름</option>
-                    </select>
+                    </select> -->
     
-                    <button type="button" class="ordbtn" style="font-weight: bold;">△</button>
+                    <button type="button" class="ordbtn filters_tiny_adjust margin50" style="font-weight: bold; top: -0.5px !important;">▲</button>
                 </div>
                 
-                <span style="margin:5px; padding: 3px 0px;">
+                <div style="margin:5px; padding: 3px 0px; display:inline-block; word-break: break-word;">
                     <a class="schv"></a>개 찾음 | 검색 조건: "<a class="searchv"></a>"
-                </span>
-                <span class="filters"></span>
+                </div>
+                <div class="filters" style="display:inline-block;"></div>
             </div>
         </div>
     </div>

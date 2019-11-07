@@ -4,6 +4,83 @@ body{
 p {
     margin: 0px;
 }
+select {
+    position: relative;
+    top: -2.2px !important;
+    height: 27.6px; /**/
+    color: white; /**/
+    background-color: #a97874; /**/
+    cursor: pointer; /**/
+    padding: 1px 8px; /**/
+    margin: 5px; /**/
+    font: 400 16px 'Margun Gothic'; /**/
+    border-radius: 15px; /**/
+    border: 2px solid #654a59; /**/
+}
+input {
+    color: white; /**/
+    background-color: #222034; /**/
+    padding: 1px 8px; /**/
+    margin: 5px; /**/
+    font: 400 16px 'Margun Gothic'; /**/
+    border-radius: 15px; /**/
+    border-style: solid; /**/
+    border-color: #654a59; /**/
+}
+button {
+    color: white; /**/
+    cursor: pointer; /**/
+    background-color: #a97874; /**/
+    padding: 1px 8px; /**/
+    margin: 5px; /**/
+    font: 400 16px 'Margun Gothic'; /**/
+    border-radius: 15px; /**/
+    border-style: solid; /**/
+    border-color: #654a59; /**/
+}
+
+
+.margin50 {
+    margin: 5px 0px;
+}
+.filters_tiny_adjust {
+    position: relative;
+    top: -3px;
+}
+
+.sliderpd {
+    position: relative;
+    top: 0px;
+    display: inline-block;
+    width: 270px;
+    height: 19.6px;
+    margin: 5px 0px;
+    border: 2px solid #654a59;
+    border-radius: 15px;
+    padding: 2px;
+}
+#ipt1, #ipt2 {
+    width: 50px;
+}
+.ui-widget-header, .ui-widget-content, .ui-state-default {
+    background: none !important;
+    border: 0px #00000000 !important;
+    height: 19.6px !important;
+    top: 0px !important;
+    margin: 0px !important;
+}
+#slider {
+    display: inline-block;
+    margin: 0px 20px;
+    width: 250px;
+}
+.ui-state-default {
+    cursor: pointer !important;
+    border: 2px solid #a97874 !important;
+    border-radius: 15px !important;
+    width: 15.6px !important;
+    height: 15.6px !important;
+}
 
 .item_filters_c {
     width: 55.5%;
@@ -12,18 +89,12 @@ p {
     margin: 5px 0px;
 }
 
-#slider {
-    display: inline-block;
-    margin: 0px 20px;
-    width: 200px;
-}
-
 .filter_c {
     cursor: pointer;
     word-break: break-word;
     margin: 5px;
     padding: 3px 10px;
-    display: inline-flex;
+    display: inline-block;
     border-radius: 15px;
 }
 

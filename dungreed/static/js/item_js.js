@@ -18,13 +18,11 @@ $(document).ready(function() {
         $("."+clicked+"_detail").css("display","block");
         $("."+clicked+"_choose").addClass('item_element_choose');
     });
-
     $(chd$).mouseenter(function() {
         if(clicked!=event.target.className){
             $("."+event.target.className+"_choose").addClass('item_element_choose');
         }
     });
-
     $(chd$).mouseleave(function() {
         if(clicked!=event.target.className){
             $("."+event.target.className+"_choose").removeClass('item_element_choose');
@@ -104,13 +102,13 @@ $(document).ready(function() {
                 if (dir == "asc") {
                     if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
                         shouldSwitch = true;
-                        $('.ordbtn').text('△');
+                        $('.ordbtn').text('▲');
                         break;
                     }
                 } else if (dir == "desc") {
                     if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
                         shouldSwitch= true;
-                        $('.ordbtn').text('▽');
+                        $('.ordbtn').text('▼');
                         break;
                     }
                 }
