@@ -25,7 +25,7 @@ SECRET_KEY = '2id7e(&63pvuo1qhf-q)cv49g+_o0jkj%qmf2%a)!94jg5gd$m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'www.dungreed-help.shop', 'localhost']
 
 
 # Application definition
@@ -77,7 +77,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'D:\Project\django_project\db.sqlite3',
+        'NAME': '/app/db.sqlite3',
+        #'NAME': 'D:\Project\django_project\db.sqlite3',
         #os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
