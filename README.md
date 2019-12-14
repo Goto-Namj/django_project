@@ -1,4 +1,4 @@
-# Django_project
+# Dungreed_help
 
 ## 소개
 - 기간 : 2019.06.27 ~ 현재
